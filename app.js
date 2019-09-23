@@ -25,7 +25,7 @@ app.set('view engine', 'handlebars');
 
 // routes
 app.use('/', (req, res) => {
-  res.send("Welcome to the rice fields!");
+  res.render('default/index');
 })
 
 app.listen(process.env.PORT, () => {
