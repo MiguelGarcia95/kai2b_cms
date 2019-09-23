@@ -20,8 +20,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // setup view engine for handlebars
-// app.engine('handlebars', hbs({defaultLayout: 'default'}));
-app.engine('handlebars', hbs({defaultLayout: 'admin'}));
+app.engine('handlebars', hbs({defaultLayout: 'default'}));
+// app.engine('handlebars', hbs({defaultLayout: 'admin'}));
 app.set('view engine', 'handlebars');
 
 // routes
