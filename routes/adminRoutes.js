@@ -8,5 +8,6 @@ router.all('/*', (req, res, next) => {
 })
 
 router.route('/').get(adminController.index);
+router.route('/posts').get(adminController.posts);
 
 module.exports = router;  
