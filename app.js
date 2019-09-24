@@ -2,9 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const hbs = require('express-handlebars');
-const flash = require('flash');
+const flash = require('connect-flash');
 const session = require('express-session')
 const app = express();
+const {globalVariables} = require('./config/config');
 
 // configure mongoose to connect to mongodb
 mongoose.connect(process.env.MONGODB_URL, {
@@ -23,6 +24,7 @@ app.use(session({
 }));
 
 app.use(flash());
+app.use(globalVariables);
 
 // configure express
 app.use(express.json());

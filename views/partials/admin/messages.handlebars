@@ -1,0 +1,26 @@
+{{#if success_message}}
+
+  <div class="row" id="proBanner_success">
+    <div class="col-12">
+      <span class="d-flex align-items-center purchase-popup message_box">
+        <p class="text-success">{{success_message}}</p>
+        <button type="button" class="btn btn-sm btn-success mr-2 message_btn" id="bannerClose_success">
+          <span>&times;</span>
+        </button>
+      </span>
+    </div>
+  </div>
+{{/if}}
+
+{{#if error_message}}
+  <div class="row" id="proBanner_error">
+    <div class="col-12">
+      <span class="d-flex align-items-center purchase-popup message_box">
+        <p class="text-danger">{{error_message}}</p>
+        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_error">
+          <span>&times;</span>
+        </button>
+      </span>
+    </div>
+  </div>
+{{/if}}

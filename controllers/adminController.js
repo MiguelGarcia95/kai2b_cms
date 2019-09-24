@@ -1,3 +1,5 @@
+const Post = require('../models/Post');
+
 module.exports = {
   index: (req, res) => {
     res.render('admin/index');
@@ -8,7 +10,20 @@ module.exports = {
   },
 
   submitPost: (req, res) => {
-    res.send('submitted post data');
+    const newPost = new Post({
+      title: req.body.title,
+      description: req.body.description,
+      status: req.body.status,
+    });
+    console.log(req.body.comments);
+    newPost.save().then(post => {
+      console.log(post);
+      req.flash('success-message', 'Post created Successfully');
+      res.redirect('/admin/posts');
+    });
+
+
+    // res.send('submitted post data');
   },
 
   createPost: (req, res) => {
