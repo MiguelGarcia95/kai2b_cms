@@ -8,5 +8,6 @@ router.all('/*', (req, res, next) => {
 })
 
 router.route('/').get(defaultController.index);
+router.route('/login').get(defaultController.login);
 
 module.exports = router;  
