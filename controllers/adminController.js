@@ -4,7 +4,7 @@ module.exports = {
   },
   
   getPosts: (req, res) => {
-    res.render('admin/posts');
+    res.render('admin/post/index');
   },
 
   submitPost: (req, res) => {
@@ -12,6 +12,6 @@ module.exports = {
   },
 
   createPost: (req, res) => {
-    res.render('admin/createPost');
+    res.render('admin/post/create');
   }
 }
