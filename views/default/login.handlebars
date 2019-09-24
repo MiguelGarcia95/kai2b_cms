@@ -1,33 +1,25 @@
  <div class="row" id='login'>
   <div class="col-three tab-full height-10"></div>
   <div class="col-six tab-full">
-    <h3 class="add-bottom">Form Styles</h3>
+    <h3 class="add-bottom">Login</h3>
 
-    <form>
+    <form method="POST" action="/login"  >
       <div>
         <label for="sampleInput">Your email</label>
-        <input class="full-width" type="email" placeholder="test@mailbox.com" id="sampleInput">
-      </div>
-      <div>
-        <label for="sampleRecipientInput">Reason for contacting</label>
-        <div class="cl-custom-select">
-          <select class="full-width" id="sampleRecipientInput">
-            <option value="Option 1">Questions</option>
-            <option value="Option 2">Report</option>
-            <option value="Option 3">Others</option>
-          </select>
-        </div>
+        <input class="full-width" name="email" type="email" placeholder="test@email.com" id="sampleInput">
       </div>
       
-      <label for="exampleMessage">Message</label>
-      <textarea class="full-width" placeholder="Your message" id="exampleMessage"></textarea>
-
+      <div>
+        <label for="sampleInput">Password</label>
+        <input class="full-width" name='password' type="password" placeholder="password" id="sampleInput">
+      </div>
+      
       <label class="add-bottom">
-        <input type="checkbox">
-        <span class="label-text">Send a copy to yourself</span>
+        <input type="checkbox" name='stay_logged'>
+        <span class="label-text">Stay logged in</span>
       </label>
       
-      <input class="btn--primary full-width" type="submit" value="Submit">
+      <input class="btn--primary full-width" type="submit" value="Login">
     </form>
   </div>
  </div>

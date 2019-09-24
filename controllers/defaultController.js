@@ -3,7 +3,19 @@ module.exports = {
     res.render('default/index');
   },
 
-  login: (req, res) => {
+  loginGet: (req, res) => {
     res.render('default/login');
-  }
+  },
+
+  loginPost: (req, res) => {
+    res.send('congrats for sending us your creds fool')
+  },
+
+  registerGet: (req, res) => {
+    res.render('default/register');
+  },
+
+  registerPost: (req, res) => {
+    res.send('congrats for sending us your creds fool')
+  },
 }
