@@ -8,10 +8,10 @@ router.all('/*', (req, res, next) => {
 })
 
 router.route('/').get(adminController.index);
-router.route('/posts')
-  .get(adminController.getPosts)
-  .post(adminController.submitPost);
+router.route('/posts').get(adminController.getPosts);
 
-router.route('/posts/add').get(adminController.createPost);
+router.route('/posts/add')
+  .get(adminController.createPost)
+  .post(adminController.submitPost);
 
 module.exports = router;  

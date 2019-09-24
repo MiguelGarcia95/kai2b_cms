@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const hbs = require('express-handlebars');
-
+const flash = require('flash');
+const session = require('express-session')
 const app = express();
 
 // configure mongoose to connect to mongodb
@@ -13,6 +14,15 @@ mongoose.connect(process.env.MONGODB_URL, {
 }).catch(err => {
   console.log("MongoDB connection failed.")
 });
+
+// flash & sesion
+app.use(session({
+  secret: 'mysecret',
+  saveUninitialized: true,
+  resave: true
+}));
+
+app.use(flash());
 
 // configure express
 app.use(express.json());
