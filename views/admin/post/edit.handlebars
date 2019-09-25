@@ -1,29 +1,33 @@
-{{> admin/title title='Create A New Post' }}
+{{> admin/title title='Edit Post' }}
 <div class="row">
   <div class="col-md-2 grid-margin height-10"></div>
   <div class="col-md-8 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <form class="forms-sample" method="Post" action="/admin/posts/create">
+        <form class="forms-sample" method="Post" action="/admin/posts/edit/{{post._id}}">
           <div class="form-group">
             <label for="exampleInputUsername1">Title</label>
-            <input type="text" name='title' class="form-control" placeholder="Title">
+            <input type="text" name='title' class="form-control" placeholder="Title" value={{post.title}}>
           </div>
           <div class="form-group">
             <label for="exampleFormControlSelect1">Status</label>
             <select class="form-control form-control-lg" name='status'>
-              <option>Public</option>
-              <option>Private</option>
-              <option>Draft</option>
+              <option value="Public" >Public</option>
+              <option value="Private" >Private</option>
+              <option value="Draft" >Draft</option>
             </select>
           </div>
           <div class="form-check form-check-flat form-check-primary">
             <label class="form-check-label">
-            <input type="checkbox" name='allowComments' class="form-check-input" value='true'> Allow Comments </label>
+              {{#if post.allowComments}}
+                <input type="checkbox" name='allowComments' class="form-check-input" value='true' checked> Allow Comments </label>
+              {{else}}
+                <input type="checkbox" name='allowComments' class="form-check-input" value='true'> Allow Comments </label>
+              {{/if}}
           </div>
           <div class="form-group">
             <label for="exampleTextarea1">Content</label>
-            <textarea name='description' class="form-control" rows="15"></textarea>
+            <textarea name='description' class="form-control" rows="15">{{post.description}}</textarea>
           </div>
           <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
         </form>

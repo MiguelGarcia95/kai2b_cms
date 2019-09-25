@@ -14,7 +14,7 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  comments: {
+  allowComments: {
     type: Boolean,
     default: false
   },

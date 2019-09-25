@@ -29,5 +29,16 @@ module.exports = {
 
   createPost: (req, res) => {
     res.render('admin/post/create');
+  },
+
+  editPost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      res.render('admin/post/edit', {post: post});
+    } catch (error) {
+      req.flash('error-message', 'Post could not be found');
+      res.redirect('/admin/posts');
+    }
+
   }
 }
