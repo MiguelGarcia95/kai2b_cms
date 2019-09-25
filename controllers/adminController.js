@@ -5,25 +5,25 @@ module.exports = {
     res.render('admin/index');
   },
   
-  getPosts: (req, res) => {
-    res.render('admin/post/index');
+  getPosts: async (req, res) => {
+    try {
+      const posts = await Post.find();
+      res.render('admin/post/index', {posts: posts});
+    } catch (error) {
+      
+    }
   },
 
-  submitPost: (req, res) => {
-    const newPost = new Post({
-      title: req.body.title,
-      description: req.body.description,
-      status: req.body.status,
-    });
-    console.log(req.body.comments);
-    newPost.save().then(post => {
-      console.log(post);
+  submitPost: async (req, res) => {
+    // later validate content
+    const post = new Post(req.body);
+    try {
+      await post.save();
       req.flash('success-message', 'Post created Successfully');
       res.redirect('/admin/posts');
-    });
-
-
-    // res.send('submitted post data');
+    } catch (error) {
+      req.flash('error-message', 'Post could not be created');
+    }
   },
 
   createPost: (req, res) => {
