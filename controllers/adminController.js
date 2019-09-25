@@ -39,6 +39,15 @@ module.exports = {
       req.flash('error-message', 'Post could not be found');
       res.redirect('/admin/posts');
     }
+  },
 
+  deletePost: async (req, res) => {
+    try {
+      const post = await Post.findByIdAndDelete(req.params.id);
+      req.flash('success-message', `Post ${post.title} was deleted`);
+      res.redirect('/admin/posts');
+    } catch (error) {
+      req.flash('error-message', 'Post could not be deleted');
+    }
   }
 }

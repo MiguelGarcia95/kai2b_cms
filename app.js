@@ -4,6 +4,7 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session')
+const methodOverride = require('method-override');
 const app = express();
 const {globalVariables} = require('./config/config');
 
@@ -34,6 +35,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // setup view engine for handlebars
 app.engine('handlebars', hbs({defaultLayout: 'default'}));
 app.set('view engine', 'handlebars');
+
+// Method Override middleware
+app.use(methodOverride('newMethod'));
 
 // routes
 const defaultRoutes = require('./routes/defaultRoutes');

@@ -7,22 +7,25 @@
           <table class="table">
             <thead>
               <tr>
-                <th> ID </th>
-                <th> Title </th>
-                <th> Description </th>
-                <th> Status </th>
-                <th> Action </th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Comments Allowed</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {{#each posts}}
               <tr>
-                <td>{{_id}}</td>
                 <td> {{title}} </td>
                 <td> {{description}} </td>
                 <td> {{status}} </td>
-                <td>
-                  <a href="/admin/posts/edit/{{_id}}" class="btn btn-gradient-primary mr-2">Edit</a>
+                <td> {{allowComments}} </td>
+                <td class="btn-group">
+                  <a href="/admin/posts/edit/{{_id}}" class="btn btn-sm btn-gradient-primary mr-2">Edit</a>
+                  <form action="/admin/posts/delete/{{_id}}?newMethod=DELETE" method="post">
+                    <button type="submit" class="btn btn-sm btn-gradient-danger mr-2" >Delete</button>
+                  </form>
                 </td>
               </tr>
               {{/each}}
