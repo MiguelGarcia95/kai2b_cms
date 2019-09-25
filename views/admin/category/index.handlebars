@@ -1,26 +1,49 @@
 {{> admin/title title='Categories' }}
 <div class="row">
-  <div class="col-md-12 grid-margin stretch-card">
+  <div class="col-md-2 grid-margin height-10"></div>
+  <div class="col-md-8 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form class="forms-sample" method="Post" action="/admin/categories/create">
+          <div class="form-group">
+            <label>Category</label>
+            <div class="input-group">
+              <input type="text" name='category' class="form-control" placeholder="Category">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-gradient-primary mr-2">Add</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 grid-margin height-10"></div>
+  <div class="col-md-8 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
-                <th>Title</th>
+                <th>Category</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
+              {{#each categories}}
               <tr>
-                <td> title </td>
+                <td> {{name}} </td>
                 <td class="btn-group">
-                  <a href="/admin/posts/edit/id" class="btn btn-sm btn-gradient-primary mr-2">Edit</a>
-                  <form action="/admin/posts/delete/id?newMethod=DELETE" method="post">
+                  <a href="/admin/posts/edit/{{_id}}" class="btn btn-sm btn-gradient-primary mr-2">Edit</a>
+                  <form action="/admin/posts/delete/{{_id}}?newMethod=DELETE" method="post">
                     <button type="submit" class="btn btn-sm btn-gradient-danger mr-2" >Delete</button>
                   </form>
                 </td>
               </tr>
+              {{/each}}
             </tbody>
           </table>
         </div>
