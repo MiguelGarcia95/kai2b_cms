@@ -1,0 +1,30 @@
+{{> admin/title title='Categories' }}
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> title </td>
+                <td class="btn-group">
+                  <a href="/admin/posts/edit/id" class="btn btn-sm btn-gradient-primary mr-2">Edit</a>
+                  <form action="/admin/posts/delete/id?newMethod=DELETE" method="post">
+                    <button type="submit" class="btn btn-sm btn-gradient-danger mr-2" >Delete</button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

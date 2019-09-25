@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const Category = require('../models/Category');
 
 module.exports = {
   index: (req, res) => {
@@ -48,6 +49,16 @@ module.exports = {
       res.redirect('/admin/posts');
     } catch (error) {
       req.flash('error-message', 'Post could not be deleted');
+    }
+  },
+
+  getCategories: async (req, res) => {
+    try {
+      const categories = await Category.find();
+
+      res.render('admin/category/index', {categories: categories});
+    } catch (error) {
+      
     }
   }
 }
