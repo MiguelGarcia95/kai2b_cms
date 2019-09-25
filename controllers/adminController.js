@@ -23,6 +23,7 @@ module.exports = {
       res.redirect('/admin/posts');
     } catch (error) {
       req.flash('error-message', 'Post could not be created');
+      res.redirect('/admin/posts');
     }
   },
 
