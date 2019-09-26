@@ -8,9 +8,9 @@
           <div class="form-group">
             <label>Category</label>
             <div class="input-group">
-              <input type="text" name='category' class="form-control" placeholder="Category">
+              <input type="text" name='category' id='category-title' class="form-control" placeholder="Category">
               <div class="input-group-append">
-                <button type="submit" class="btn btn-gradient-primary mr-2">Add</button>
+                <button type="submit" id='create-category-button' class="btn btn-gradient-primary mr-2">Add</button>
               </div>
             </div>
           </div>
@@ -32,13 +32,12 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="category-list">
               {{#each categories}}
               <tr>
                 <td> {{name}} </td>
                 <td class="btn-group">
-                  <a href="/admin/posts/edit/{{_id}}" class="btn btn-sm btn-gradient-primary mr-2">Edit</a>
-                  <form action="/admin/posts/delete/{{_id}}?newMethod=DELETE" method="post">
+                  <form action="/admin/categories/delete/{{_id}}?newMethod=DELETE" method="post">
                     <button type="submit" class="btn btn-sm btn-gradient-danger mr-2" >Delete</button>
                   </form>
                 </td>

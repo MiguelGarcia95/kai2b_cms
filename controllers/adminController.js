@@ -55,10 +55,29 @@ module.exports = {
   getCategories: async (req, res) => {
     try {
       const categories = await Category.find();
-
       res.render('admin/category/index', {categories: categories});
     } catch (error) {
       
     }
-  }
+  },
+
+  createCategories: async (req, res) => {
+    try {
+      const category = await new Category(req.body)
+      await category.save();
+      res.status(200).json(category);
+    } catch (error) {
+      
+    }
+  },
+
+  deleteCategory: async (req, res) => {
+    try {
+      const category = await Category.findByIdAndDelete(req.params.id);
+      req.flash('success-message', `Category ${category.name} was deleted`);
+      res.redirect('/admin/categories');
+    } catch (error) {
+      req.flash('error-message', 'Category could not be deleted');
+    }
+  },
 }
