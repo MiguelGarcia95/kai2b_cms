@@ -8,6 +8,7 @@ router.all('/*', (req, res, next) => {
 })
 
 router.route('/').get(defaultController.index);
+
 router.route('/login')
   .get(defaultController.loginGet)
   .post(defaultController.loginPost);
@@ -15,5 +16,7 @@ router.route('/login')
 router.route('/register')
   .get(defaultController.registerGet)
   .post(defaultController.registerPost);
+
+router.route('/categories').get(defaultController.getCategories);
 
 module.exports = router;  
