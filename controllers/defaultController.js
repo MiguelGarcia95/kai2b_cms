@@ -1,6 +1,14 @@
+const Post = require('../models/Post');
+const Category = require('../models/Category');
+
 module.exports = {
-  index: (req, res) => {
-    res.render('default/index');
+  index: async (req, res) => {
+    try {
+      const posts = await Post.find().populate('category', 'name');
+      res.render('default/index', {posts: posts});
+    } catch (error) {
+      
+    }
   },
 
   loginGet: (req, res) => {

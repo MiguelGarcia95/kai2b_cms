@@ -4,10 +4,9 @@
 <section class="s-content">
   <div class="row entries-wrap wide">
     <div class="entries">
-      {{> default/post}}
-      {{> default/post}}
-      {{> default/post}}
-      {{> default/post}}
+      {{#each posts}}
+        {{> default/post title=title category=category id=_id }}
+      {{/each}}
     </div> <!-- end entries -->
   </div> <!-- end entries-wrap -->
   {{> default/pagination}}
