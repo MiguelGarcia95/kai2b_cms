@@ -31,7 +31,7 @@ module.exports = {
 
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
+      const post = await Post.findById(req.params.id).populate('category', 'name');
       res.render('default/post/single', {post});
     } catch (error) {
       

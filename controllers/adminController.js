@@ -46,6 +46,9 @@ module.exports = {
 
   updatePost: async (req, res) => {
     try {
+      if (!req.body.allowComments) {
+        req.body.allowComments = false;
+      }
       await Post.findByIdAndUpdate(req.params.id, {$set:req.body});
       req.flash('success-message', 'Post updated successfully');
       res.redirect('/admin/posts');
