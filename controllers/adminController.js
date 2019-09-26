@@ -8,7 +8,7 @@ module.exports = {
   
   getPosts: async (req, res) => {
     try {
-      const posts = await Post.find();
+      const posts = await Post.find().populate('category', 'name');
       res.render('admin/post/index', {posts: posts});
     } catch (error) {
       
@@ -36,7 +36,7 @@ module.exports = {
   editPost: async (req, res) => {
     try {
       const categories = await Category.find();
-      const post = await Post.findById(req.params.id);
+      const post = await Post.findById(req.params.id).populate('category');
       res.render('admin/post/edit', {post, categories});
     } catch (error) {
       req.flash('error-message', 'Post could not be found');
