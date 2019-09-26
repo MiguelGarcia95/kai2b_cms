@@ -18,5 +18,7 @@ router.route('/register')
   .post(defaultController.registerPost);
 
 router.route('/categories').get(defaultController.getCategories);
+router.route('/posts').get(defaultController.getPosts);
+router.route('/posts/:id').get(defaultController.getPost);
 
 module.exports = router;  

@@ -20,6 +20,24 @@ module.exports = {
     }
   },
 
+  getPosts: async (req, res) => {
+    try {
+      const posts = await Post.find();
+      res.render('default/post/index', {posts});
+    } catch (error) {
+      
+    }
+  },
+
+  getPost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      res.render('default/post/single', {post});
+    } catch (error) {
+      
+    }
+  },
+
   loginGet: (req, res) => {
     res.render('default/login');
   },
