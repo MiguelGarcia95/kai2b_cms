@@ -28,14 +28,16 @@ module.exports = {
     }
   },
 
-  createPost: (req, res) => {
-    res.render('admin/post/create');
+  createPost: async (req, res) => {
+    const categories = await Category.find();
+    res.render('admin/post/create', {categories});
   },
 
   editPost: async (req, res) => {
     try {
+      const categories = await Category.find();
       const post = await Post.findById(req.params.id);
-      res.render('admin/post/edit', {post: post});
+      res.render('admin/post/edit', {post, categories});
     } catch (error) {
       req.flash('error-message', 'Post could not be found');
       res.redirect('/admin/posts');
