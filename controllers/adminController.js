@@ -44,6 +44,17 @@ module.exports = {
     }
   },
 
+  updatePost: async (req, res) => {
+    try {
+      await Post.findByIdAndUpdate(req.params.id, {$set:req.body});
+      req.flash('success-message', 'Post updated successfully');
+      res.redirect('/admin/posts');
+    } catch (error) {
+      req.flash('error-message', 'Post could not be updated');
+      res.redirect('/admin/posts');
+    }
+  },
+
   deletePost: async (req, res) => {
     try {
       const post = await Post.findByIdAndDelete(req.params.id);

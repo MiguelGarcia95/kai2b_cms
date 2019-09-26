@@ -12,6 +12,7 @@ const {globalVariables} = require('./config/config');
 // configure mongoose to connect to mongodb
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
+  useFindAndModify: false,
 }).then(res => {
   console.log("MongoDB connected succesfully")
 }).catch(err => {
