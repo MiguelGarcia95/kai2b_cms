@@ -22,8 +22,10 @@ module.exports = {
 
   getCategory: async (req, res) => {
     try {
-      const categories = await Category.find();
-      res.render('default/category/index', {categories});
+      const category = await Category.findById(req.params.id);
+      const posts = await Post.find({category: req.params.id});
+      console.log(posts)
+      res.render('default/category/single', {category, posts});
     } catch (error) {
       
     }
