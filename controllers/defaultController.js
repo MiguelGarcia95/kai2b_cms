@@ -16,7 +16,7 @@ module.exports = {
       const categories = await Category.find();
       res.render('default/category/index', {categories});
     } catch (error) {
-      
+      res.redirect('/');
     }
   },
 
@@ -24,19 +24,18 @@ module.exports = {
     try {
       const category = await Category.findById(req.params.id);
       const posts = await Post.find({category: req.params.id});
-      console.log(posts)
       res.render('default/category/single', {category, posts});
     } catch (error) {
-      
+      res.redirect('/categories');
     }
   },
 
   getPosts: async (req, res) => {
     try {
-      const posts = await Post.find();
+      const posts = await Post.find().populate('category', 'name');;
       res.render('default/post/index', {posts});
     } catch (error) {
-      
+      res.redirect('/');
     }
   },
 
