@@ -1,0 +1,14 @@
+<section class="s-content s-content--top-padding s-content--narrow margin-bottom-100 ">
+  <div class="row narrow margin-bottom-100">
+      <div class="col-full s-content__header">
+          <h1 class="display-1 display-1--with-line-sep">{{category.name}}</h1>
+      </div>
+  </div>
+  <div class="row entries-wrap wide">
+    <div class="entries">
+      {{#each posts}}
+        {{> default/post title=title category=category id=_id }}
+      {{/each}}
+    </div> <!-- end entries -->
+  </div> <!-- end entries-wrap -->
+</section>
