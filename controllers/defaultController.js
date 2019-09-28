@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const User = require('../models/User');
 const Category = require('../models/Category');
 
 module.exports = {
@@ -60,7 +61,13 @@ module.exports = {
     res.render('default/register');
   },
 
-  registerPost: (req, res) => {
-    res.send('congrats for sending us your creds fool')
+  registerPost: async (req, res) => {
+    const user = await new User(req.body);
+    try {
+      await user.save();
+      res.redirect('/');
+    } catch (error) {
+      res.redirect('/register');
+    }
   },
 }
