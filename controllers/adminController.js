@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 const Category = require('../models/Category');
 const {isEmpty} = require('../config/helperFunctions')
+const fs = require('fs');
 
 module.exports = {
   index: (req, res) => {
@@ -81,6 +82,9 @@ module.exports = {
   deletePost: async (req, res) => {
     try {
       const post = await Post.findByIdAndDelete(req.params.id);
+      fs.unlink(`./public${post.image}`, error => {
+        if (error) throw error;
+     });
       req.flash('success-message', `Post ${post.title} was deleted`);
       res.redirect('/admin/posts');
     } catch (error) {
