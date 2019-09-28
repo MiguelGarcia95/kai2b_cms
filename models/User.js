@@ -6,32 +6,46 @@ const jwt = require('jsonwebtoken');
 const UserSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: false,
+    trim: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
+    trim: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
   },
   created_at: {
     type: Date,
     default: Date.now()
-  },
-  comments: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'comment'
-    }
-  ],
-  posts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'post'
-    }
-  ],
+  }
 });
+
+// encrypt password before saving user
+
+UserSchema.pre('save', async function(next) {
+  const user = this;
+
+  if (user.isModified || user.isNew) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();
+});
+
+// Create Token
+UserSchema.methods.createAuthToken = async function() {
+  const user = this;
+  const payload = {id: user._id};
+  const options = {expiresIn: '2d', issuer: 'Blog kai'};
+  const secret = process.env.JWT_SECRET;
+  const token = jwt.sign(payload, secret, options);
+  return token;
+}
 
 module.exports = mongoose.model('user', UserSchema);
