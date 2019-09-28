@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
 const Category = require('../models/Category');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   index: async (req, res) => {
@@ -53,8 +54,19 @@ module.exports = {
     res.render('default/login');
   },
 
-  loginPost: (req, res) => {
-    res.send('congrats for sending us your creds fool')
+  loginPost: async (req, res) => {
+    try {
+      const user = await User.findOne({email: req.body.email});
+      const match = await bcrypt.compare(req.body.password, user.password);
+      if (match) {
+        res.redirect('/admin');
+      } else {
+        // res.status(401).send('Authentication error');  
+        res.redirect('/login');
+      }
+    } catch (error) {
+      res.redirect('/login');
+    }
   },
 
   registerGet: (req, res) => {
