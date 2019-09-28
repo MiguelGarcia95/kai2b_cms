@@ -5,6 +5,7 @@ const hbs = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session')
 const methodOverride = require('method-override');
+const fileupload = require('express-fileupload');
 const app = express();
 const {selectOption} = require('./config/helperFunctions');
 const {globalVariables} = require('./config/config');
@@ -40,6 +41,9 @@ app.set('view engine', 'handlebars');
 
 // Method Override middleware
 app.use(methodOverride('newMethod'));
+
+// fileupload middleware
+app.use(fileupload());
 
 // routes
 const defaultRoutes = require('./routes/defaultRoutes');

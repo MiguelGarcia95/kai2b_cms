@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
 const Category = require('../models/Category');
+const {isEmpty} = require('../config/helperFunctions')
 
 module.exports = {
   index: (req, res) => {
@@ -17,6 +18,22 @@ module.exports = {
 
   submitPost: async (req, res) => {
     // later validate content
+
+    let filename = '';
+    let path = '';
+
+    if (!isEmpty(req.files)) {
+      let file = req.files.postImage;
+      // name will be userID+id
+      filename = file.name;
+      path = '/uploads/';
+
+      file.mv(path+filename, error => {
+        if (error) throw error;
+      })
+    }
+    req.body.image = path+filename;
+
     const post = new Post(req.body);
     try {
       await post.save();

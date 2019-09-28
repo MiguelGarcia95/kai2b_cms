@@ -1,13 +1,13 @@
 <article class="col-block">
   <div class="item-entry" data-aos="zoom-in">
     <div class="item-entry__thumb">
-      <a href="single-standard.html" class="item-entry__thumb-link">
-        <img src="/default/images/thumbs/post/lamp-400.jpg" srcset="images/thumbs/post/lamp-400.jpg 1x, images/thumbs/post/lamp-800.jpg 2x" alt="">
+      <a href="/posts/{{id}}" class="item-entry__thumb-link">
+        <img src="{{image}}" alt="{{title}}">
       </a>
     </div>
 
     <div class="item-entry__text">    
-      <div class="item-entry__cat"><a href="category.html">{{category.name}}</a></div>
+      <div class="item-entry__cat"><a href="/categories/{{category._id}}">{{category.name}}</a></div>
       <h1 class="item-entry__title"><a href="/posts/{{id}}">{{title}}</a></h1>
       <div class="item-entry__date">{{created_at}}</div>
     </div>
