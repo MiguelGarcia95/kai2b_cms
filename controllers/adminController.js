@@ -5,13 +5,15 @@ const fs = require('fs');
 
 module.exports = {
   index: (req, res) => {
-    res.render('admin/index');
+    const user = req.user || false;
+    res.render('admin/index', {user});
   },
   
   getPosts: async (req, res) => {
     try {
       const posts = await Post.find().populate('category', 'name');
-      res.render('admin/post/index', {posts: posts});
+      const user = req.user || false;
+      res.render('admin/post/index', {posts, user});
     } catch (error) {
       
     }
@@ -42,14 +44,16 @@ module.exports = {
 
   createPost: async (req, res) => {
     const categories = await Category.find();
-    res.render('admin/post/create', {categories});
+    const user = req.user || false;
+    res.render('admin/post/create', {categories, user});
   },
 
   editPost: async (req, res) => {
     try {
       const categories = await Category.find();
+      const user = req.user || false;
       const post = await Post.findById(req.params.id).populate('category');
-      res.render('admin/post/edit', {post, categories});
+      res.render('admin/post/edit', {post, categories, user});
     } catch (error) {
       req.flash('error-message', 'Post could not be found');
       res.redirect('/admin/posts');
@@ -95,7 +99,8 @@ module.exports = {
   getCategories: async (req, res) => {
     try {
       const categories = await Category.find();
-      res.render('admin/category/index', {categories: categories});
+      const user = req.user || false;
+      res.render('admin/category/index', {categories, user});
     } catch (error) {
       
     }
