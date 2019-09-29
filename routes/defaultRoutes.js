@@ -31,11 +31,27 @@ passport.use(new localStrategy({
   }
 
   return done(null, user, req.flash('success-message', 'Login Successful'));
-}))
+}));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 router.route('/login')
   .get(defaultController.loginGet)
-  .post(defaultController.loginPost);
+  .post( passport.authenticate('local', {
+    successRedirect: '/admin',
+    failureRedirect: '/login',
+    failureFlash: true,
+    successFlash: true,
+    session: true,
+  }) ,defaultController.loginPost);
 
 router.route('/register')
   .get(defaultController.registerGet)
@@ -45,5 +61,7 @@ router.route('/categories').get(defaultController.getCategories);
 router.route('/categories/:id').get(defaultController.getCategory);
 router.route('/posts').get(defaultController.getPosts);
 router.route('/posts/:id').get(defaultController.getPost);
+
+router.route('/logout').get(defaultController.logout);
 
 module.exports = router;  

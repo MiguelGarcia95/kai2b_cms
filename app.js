@@ -6,6 +6,8 @@ const flash = require('connect-flash');
 const session = require('express-session')
 const methodOverride = require('method-override');
 const fileupload = require('express-fileupload');
+const passport = require('passport');
+
 const app = express();
 const {selectOption} = require('./config/helperFunctions');
 const {globalVariables} = require('./config/config');
@@ -29,6 +31,9 @@ app.use(session({
 
 app.use(flash());
 app.use(globalVariables);
+
+// passport setup
+app.use(passport.initialize());
 
 // configure express
 app.use(express.json());

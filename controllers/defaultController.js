@@ -55,19 +55,24 @@ module.exports = {
   },
 
   loginPost: async (req, res) => {
-    try {
-      // const user = await User.findOne({email: req.body.email});
-      // const match = await bcrypt.compare(req.body.password, user.password);
-      if (match) {
-        res.redirect('/admin');
-      } else {
-        // res.status(401).send('Authentication error');  
-        res.redirect('/login');
-      }
-    } catch (error) {
-      res.redirect('/login');
-    }
+    // try {
+    //   // const user = await User.findOne({email: req.body.email});
+    //   // const match = await bcrypt.compare(req.body.password, user.password);
+    //   // if (match) {
+    //   //   res.redirect('/admin');
+    //   // } else {
+    //   //   // res.status(401).send('Authentication error');  
+    //   //   res.redirect('/login');
+    //   // }
+    // } catch (error) {
+    //   res.redirect('/login');
+    // }
   },
+  logout: async (req, res) => {
+    req.logout();
+    res.redirect('/');
+  },
+
 
   registerGet: (req, res) => {
     res.render('default/register');
