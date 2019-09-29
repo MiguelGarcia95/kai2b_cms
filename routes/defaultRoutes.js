@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const defaultController = require('../controllers/defaultController');
+const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const User = require('../models/User');
@@ -17,7 +18,19 @@ passport.use(new localStrategy({
   usernameField: 'email',
   passReqToCallback: true,
 }, async (req, email, password, done) => {
-  const user = await User.findOne({email: email})
+  const user = await User.findOne({email: email});
+
+  if (!user) {
+    return done(null, false, req.flash('error-message', 'User not found with this email.'));
+  }
+
+  const match = await bcrypt.compare(password, user.password);
+
+  if (!match) {
+    return done(null, false, req.flash('error-message', 'Invalid username or password.'));
+  }
+
+  return done(null, user, req.flash('success-message', 'Login Successful'));
 }))
 
 router.route('/login')

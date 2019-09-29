@@ -56,8 +56,8 @@ module.exports = {
 
   loginPost: async (req, res) => {
     try {
-      const user = await User.findOne({email: req.body.email});
-      const match = await bcrypt.compare(req.body.password, user.password);
+      // const user = await User.findOne({email: req.body.email});
+      // const match = await bcrypt.compare(req.body.password, user.password);
       if (match) {
         res.redirect('/admin');
       } else {
