@@ -7,18 +7,18 @@ module.exports = {
   index: async (req, res) => {
     try {
       const posts = await Post.find().populate('category', 'name');
-      console.log(req.isAuthenticated())
-      console.log(req.user)
-      res.render('default/index', {posts});
+      const user = req.user || false;
+      res.render('default/index', {posts, user});
     } catch (error) {
       
     }
-  },
+  }, 
 
   getCategories: async (req, res) => {
     try {
       const categories = await Category.find();
-      res.render('default/category/index', {categories});
+      const user = req.user || false;
+      res.render('default/category/index', {categories, user});
     } catch (error) {
       res.redirect('/');
     }
@@ -28,7 +28,8 @@ module.exports = {
     try {
       const category = await Category.findById(req.params.id);
       const posts = await Post.find({category: req.params.id});
-      res.render('default/category/single', {category, posts});
+      const user = req.user || false;
+      res.render('default/category/single', {category, posts, user});
     } catch (error) {
       res.redirect('/categories');
     }
@@ -36,8 +37,9 @@ module.exports = {
 
   getPosts: async (req, res) => {
     try {
+      const user = req.user || false;
       const posts = await Post.find().populate('category', 'name');;
-      res.render('default/post/index', {posts});
+      res.render('default/post/index', {posts, user});
     } catch (error) {
       res.redirect('/');
     }
@@ -46,14 +48,20 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id).populate('category', 'name');
-      res.render('default/post/single', {post});
+      const user = req.user || false;
+      res.render('default/post/single', {post, user});
     } catch (error) {
       res.redirect('/');
     }
   },
 
   loginGet: (req, res) => {
-    res.render('default/login');
+    const user = req.user || false;
+    if (user) {
+      res.redirect('/')
+    } else {
+      res.render('default/login');
+    }
   },
 
   loginPost: async (req, res) => {
@@ -66,7 +74,12 @@ module.exports = {
 
 
   registerGet: (req, res) => {
-    res.render('default/register');
+    const user = req.user || false;
+    if (user) {
+      res.redirect('/');
+    } else {
+      res.render('default/register');
+    }
   },
 
   registerPost: async (req, res) => {

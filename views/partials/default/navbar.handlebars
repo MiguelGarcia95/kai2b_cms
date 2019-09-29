@@ -26,7 +26,7 @@
         <li class="current"><a href="/" title="">Home</a></li>
         <li class="current"><a href="/categories" title="">Categories</a></li>
         <li class="current"><a href="/posts" title="">Blog</a></li>
-        {{#if isAuthenticated}}
+        {{#if user}}
         <li><a href="/admin" title="">Admin</a></li>
         <li><a href="/logout" title="">Logout</a></li>
         {{else}}
