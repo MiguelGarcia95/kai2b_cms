@@ -18,6 +18,7 @@ passport.use(new localStrategy({
   usernameField: 'email',
   passReqToCallback: true,
 }, async (req, email, password, done) => {
+
   const user = await User.findOne({email: email});
 
   if (!user) {
@@ -29,7 +30,6 @@ passport.use(new localStrategy({
   if (!match) {
     return done(null, false, req.flash('error-message', 'Invalid username or password.'));
   }
-
   return done(null, user, req.flash('success-message', 'Login Successful'));
 }));
 

@@ -34,6 +34,7 @@ app.use(globalVariables);
 
 // passport setup
 app.use(passport.initialize());
+app.use(passport.session());
 
 // configure express
 app.use(express.json());
