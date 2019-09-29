@@ -37,14 +37,4 @@ UserSchema.pre('save', async function(next) {
   next();
 });
 
-// Create Token
-// UserSchema.methods.createAuthToken = async function() {
-//   const user = this;
-//   const payload = {id: user._id};
-//   const options = {expiresIn: '2d', issuer: 'Blog kai'};
-//   const secret = process.env.JWT_SECRET;
-//   const token = jwt.sign(payload, secret, options);
-//   return token;
-// }
-
 module.exports = mongoose.model('user', UserSchema);
