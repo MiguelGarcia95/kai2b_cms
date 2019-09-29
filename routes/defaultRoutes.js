@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const defaultController = require('../controllers/defaultController');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const User = require('../models/User');
 
 router.all('/*', (req, res, next) => {
   req.app.locals.layout = 'default';
@@ -8,6 +11,14 @@ router.all('/*', (req, res, next) => {
 })
 
 router.route('/').get(defaultController.index);
+
+// Defining local strat
+passport.use(new localStrategy({
+  usernameField: 'email',
+  passReqToCallback: true,
+}, async (req, email, password, done) => {
+  const user = await User.findOne({email: email})
+}))
 
 router.route('/login')
   .get(defaultController.loginGet)
