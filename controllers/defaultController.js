@@ -48,6 +48,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id).populate('category', 'name');
+      const comments = await Comment.find({post_id: req.params.id});
       const user = req.user || false;
       res.render('default/post/single', {post, user});
     } catch (error) {
@@ -56,6 +57,7 @@ module.exports = {
   },
 
   postComment: async (req, res) => {
+    req.post = req.params.id;
     const comment = await new Comment(req.body);
     const user = await User.findById(req.user);
     try {
