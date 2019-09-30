@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
+const Comment = require('../models/Comment');
 const Category = require('../models/Category');
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
       const user = req.user || false;
       res.render('default/index', {posts, user});
     } catch (error) {
-      
+      res.redirect('back');
     }
   }, 
 
@@ -55,7 +56,13 @@ module.exports = {
   },
 
   postComment: async (req, res) => {
-
+    const comment = await new Comment(req.body);
+    try {
+      await comment.save();
+      res.redirect('back');
+    } catch (error) {
+      res.redirect('back');
+    }
   },
 
   loginGet: (req, res) => {
