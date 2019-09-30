@@ -19,6 +19,10 @@ router.route('/posts/edit/:id')
   .get(adminController.editPost)
   .put(adminController.updatePost);
 
+router.route('/posts/:id/comments')
+  .get(adminController.getComments);
+
+
 router.route('/posts/delete/:id')
   .delete(adminController.deletePost)
   

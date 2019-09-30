@@ -60,7 +60,9 @@ router.route('/register')
 router.route('/categories').get(defaultController.getCategories);
 router.route('/categories/:id').get(defaultController.getCategory);
 router.route('/posts').get(defaultController.getPosts);
-router.route('/posts/:id').get(defaultController.getPost);
+router.route('/posts/:id')
+  .get(defaultController.getPost)
+  .post(defaultController.postComment);
 
 router.route('/logout').get(defaultController.logout);
 

@@ -112,6 +112,10 @@ module.exports = {
     }
   },
 
+  getComments: async (req, res) => {
+
+  },
+
   createCategories: async (req, res) => {
     try {
       const category = await new Category(req.body)

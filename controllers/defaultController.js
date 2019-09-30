@@ -54,6 +54,10 @@ module.exports = {
     }
   },
 
+  postComment: async (req, res) => {
+
+  },
+
   loginGet: (req, res) => {
     const user = req.user || false;
     if (user) {
