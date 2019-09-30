@@ -1,13 +1,11 @@
 const Post = require('../models/Post');
 const Category = require('../models/Category');
 const {isEmpty} = require('../config/helperFunctions')
-const md5 = require('md5');
 const fs = require('fs');
 
 module.exports = {
   index: (req, res) => {
     const user = req.user || false;
-    user.avatar = `https://gravatar.com/avatar/${md5(user.email)}?d=identicon`;
     res.render('admin/index', {user});
   },
   
@@ -15,7 +13,6 @@ module.exports = {
     try {
       const posts = await Post.find().populate('category', 'name');
       const user = req.user || false;
-      user.avatar = `https://gravatar.com/avatar/${md5(user.email)}?d=identicon`;
       res.render('admin/post/index', {posts, user});
     } catch (error) {
       
@@ -48,7 +45,6 @@ module.exports = {
   createPost: async (req, res) => {
     const categories = await Category.find();
     const user = req.user || false;
-    user.avatar = `https://gravatar.com/avatar/${md5(user.email)}?d=identicon`;
     res.render('admin/post/create', {categories, user});
   },
 
@@ -56,7 +52,6 @@ module.exports = {
     try {
       const categories = await Category.find();
       const user = req.user || false;
-      user.avatar = `https://gravatar.com/avatar/${md5(user.email)}?d=identicon`;
       const post = await Post.findById(req.params.id).populate('category');
       res.render('admin/post/edit', {post, categories, user});
     } catch (error) {
@@ -105,7 +100,6 @@ module.exports = {
     try {
       const categories = await Category.find();
       const user = req.user || false;
-      user.avatar = `https://gravatar.com/avatar/${md5(user.email)}?d=identicon`;
       res.render('admin/category/index', {categories, user});
     } catch (error) {
       

@@ -2,6 +2,7 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const Comment = require('../models/Comment');
 const Category = require('../models/Category');
+const md5 = require('md5');
 
 module.exports = {
   index: async (req, res) => {
@@ -48,16 +49,16 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id).populate('category', 'name');
-      const comments = await Comment.find({post_id: req.params.id});
+      const comments = await Comment.find({post: req.params.id});
       const user = req.user || false;
-      res.render('default/post/single', {post, user});
+      res.render('default/post/single', {post, user, comments});
     } catch (error) {
       res.redirect('/');
     }
   },
 
   postComment: async (req, res) => {
-    req.post = req.params.id;
+    req.body.post = req.params.id;
     const comment = await new Comment(req.body);
     const user = await User.findById(req.user);
     try {
@@ -93,17 +94,18 @@ module.exports = {
   registerGet: (req, res) => {
     const user = req.user || false;
     if (user) {
-      res.redirect('/');
+      res.redirect('/admin');
     } else {
       res.render('default/register');
     }
   },
 
   registerPost: async (req, res) => {
+    req.body.avatar = `https://gravatar.com/avatar/${md5(req.body.email)}?d=identicon`;
     const user = await new User(req.body);
     try {
       await user.save();
-      res.redirect('/');
+      res.redirect('/login');
     } catch (error) {
       res.redirect('/register');
     }
