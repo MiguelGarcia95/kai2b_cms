@@ -21,7 +21,9 @@ module.exports = {
 
   submitPost: async (req, res) => {
     // later validate content
+    
     let imagePath = '';
+    req.body.user = req.user._id;
     const post = new Post(req.body);
     try {
       if (!isEmpty(req.files)) {

@@ -48,8 +48,8 @@ module.exports = {
 
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id).populate('category', 'name');
-      const comments = await Comment.find({post: req.params.id});
+      const post = await Post.findById(req.params.id).populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]);
+      const comments = await Comment.find({post: req.params.id}).populate('user', ['name', 'avatar']);
       const user = req.user || false;
       res.render('default/post/single', {post, user, comments});
     } catch (error) {

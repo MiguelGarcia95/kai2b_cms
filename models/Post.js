@@ -8,7 +8,7 @@ const PostSchema = new Schema({
   },
   image: {
     type: String,
-    default: ''
+    required: true
   },
   status: {
     type: String,
@@ -28,11 +28,13 @@ const PostSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'user',
+    required: true
   },
   category: {
     type: Schema.Types.ObjectId,
-    ref: 'category'
+    ref: 'category',
+    required: true
   },
 });
 
