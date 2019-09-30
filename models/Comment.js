@@ -8,7 +8,8 @@ const CommentSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'user',
+    required: true
   },
   approved: {
     type: Boolean,

@@ -57,9 +57,14 @@ module.exports = {
 
   postComment: async (req, res) => {
     const comment = await new Comment(req.body);
+    const user = await User.findById(req.user);
     try {
-      await comment.save();
-      res.redirect('back');
+      if (user) {
+        await comment.save();
+        res.redirect('back');
+      } else {
+        res.redirect('back');
+      }
     } catch (error) {
       res.redirect('back');
     }
