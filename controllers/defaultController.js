@@ -11,6 +11,7 @@ module.exports = {
       const user = req.user || false;
       res.render('default/index', {posts, user});
     } catch (error) {
+      req.flash('error-message', 'Could not get any posts. Try again.');
       res.redirect('back');
     }
   }, 
@@ -21,6 +22,7 @@ module.exports = {
       const user = req.user || false;
       res.render('default/category/index', {categories, user});
     } catch (error) {
+      req.flash('error-message', 'Could not get any categories. Try again.');
       res.redirect('/');
     }
   },
@@ -32,6 +34,7 @@ module.exports = {
       const user = req.user || false;
       res.render('default/category/single', {category, posts, user});
     } catch (error) {
+      req.flash('error-message', 'Could not get any posts. Try again.');
       res.redirect('/categories');
     }
   },
@@ -42,6 +45,7 @@ module.exports = {
       const posts = await Post.find().populate('category', 'name');;
       res.render('default/post/index', {posts, user});
     } catch (error) {
+      req.flash('error-message', 'Could not get any posts. Try again.');
       res.redirect('/');
     }
   },
@@ -53,6 +57,7 @@ module.exports = {
       const user = req.user || false;
       res.render('default/post/single', {post, user, comments});
     } catch (error) {
+      req.flash('error-message', 'Post does not exist.');
       res.redirect('/');
     }
   },
@@ -65,10 +70,13 @@ module.exports = {
       if (user) {
         await comment.save();
         res.redirect('back');
+        req.flash('success-message', 'Comment posted.');
       } else {
         res.redirect('back');
+        req.flash('error-message', 'Please Login.');
       }
     } catch (error) {
+      req.flash('error-message', 'Could not post comment.');
       res.redirect('back');
     }
   },
@@ -76,7 +84,8 @@ module.exports = {
   loginGet: (req, res) => {
     const user = req.user || false;
     if (user) {
-      res.redirect('/')
+      req.flash('success-message', 'You are already logged in.');
+      res.redirect('/');
     } else {
       res.render('default/login');
     }
@@ -87,6 +96,7 @@ module.exports = {
 
   logout: async (req, res) => {
     req.logout();
+    req.flash('success-message', 'Logged out successfully.');
     res.redirect('/');
   },
 
@@ -94,6 +104,7 @@ module.exports = {
   registerGet: (req, res) => {
     const user = req.user || false;
     if (user) {
+      req.flash('success-message', 'You are already logged in.');
       res.redirect('/admin');
     } else {
       res.render('default/register');
@@ -105,8 +116,10 @@ module.exports = {
     const user = await new User(req.body);
     try {
       await user.save();
+      req.flash('success-message', 'Registration successful. Please login.');
       res.redirect('/login');
     } catch (error) {
+      req.flash('error-message', error.message);
       res.redirect('/register');
     }
   },
