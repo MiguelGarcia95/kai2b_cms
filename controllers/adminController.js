@@ -118,7 +118,8 @@ module.exports = {
       await category.save();
       res.status(200).json(category);
     } catch (error) {
-      
+      req.flash('error-message', 'Category could not be created');
+      res.redirect('back');
     }
   },
 
