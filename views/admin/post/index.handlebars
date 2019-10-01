@@ -22,7 +22,13 @@
                 <td> {{description}} </td>
                 <td> {{status}} </td>
                 <td> {{category.name}} </td>
-                <td> {{allowComments}} </td>
+                {{#if allowComments}}
+                  <td> 
+                    <a href="/admin/posts/comments/{{_id}}" class="btn btn-sm btn-gradient-primary mr-2">View Comments</a>
+                  </td>
+                {{else}}
+                  <td> {{allowComments}} </td>
+                {{/if}}
                 <td class="btn-group">
                   <a href="/admin/posts/edit/{{_id}}" class="btn btn-sm btn-gradient-primary mr-2">Edit</a>
                   <form action="/admin/posts/delete/{{_id}}?newMethod=DELETE" method="post">

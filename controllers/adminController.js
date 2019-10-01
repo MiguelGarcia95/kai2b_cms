@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
 const Category = require('../models/Category');
+const Comment = require('../models/Comment');
 const {isEmpty} = require('../config/helperFunctions')
 const fs = require('fs');
 
@@ -15,7 +16,21 @@ module.exports = {
       const user = req.user || false;
       res.render('admin/post/index', {posts, user});
     } catch (error) {
-      
+      req.flash('error-message', 'Could not get posts. Try Again');
+      res.render('admin/index', {user});
+    }
+  },
+
+  getPostComments: async (req, res) => {
+    const user = req.user || false;
+    try {
+      const post = await Post.findById(req.params.id);
+      // const post = await Post.findById(req.params.id).populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]);
+      const comments = await Comment.find({post: req.params.id}).populate('user', ['name', 'avatar']);
+      res.render('admin/comments/index', {user, comments});
+    } catch (error) {
+      req.flash('error-message', 'Could not get post comments. Try Again');
+      res.redirect('/admin/posts')
     }
   },
 

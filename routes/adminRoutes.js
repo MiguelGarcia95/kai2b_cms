@@ -19,6 +19,9 @@ router.route('/posts/edit/:id')
   .get(adminController.editPost)
   .put(adminController.updatePost);
 
+router.route('/posts/comments/:id')
+  .get(adminController.getPostComments)
+
 router.route('/posts/:id/comments')
   .get(adminController.getComments);
 
