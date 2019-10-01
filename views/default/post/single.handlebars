@@ -11,19 +11,12 @@
             <div class="entry__header col-full">
                 <h1 class="entry__header-title display-1">{{post.title}}</h1>
                 <ul class="entry__header-meta">
-                        <li class="date">
-                            {{convertTime post.created_at }}
-                        </li>
-                    
-                    <li class="byline">
-                        By
-                        <a href="#0">{{post.user.name}}</a>
-                    </li>
+                    <li class="date">{{convertTime post.created_at}}</li>
+                    <li class="byline">By <a href="#0">{{post.user.name}}</a></li>
                 </ul>
             </div>
 
             <div class="col-full entry__main">
-
                 <p class="lead drop-cap">{{post.description}}</p>
                 <div class="entry__taxonomies">
                     <div class="entry__cat">
@@ -31,8 +24,8 @@
                         <span class="entry__tax-list">
                             <a href="/categories/{{post._id}}">{{post.category.name}}</a>
                         </span>
-                    </div> <!-- end entry__cat -->
-                </div> <!-- end s-content__taxonomies -->
+                    </div>
+                </div>
 
                 <div class="entry__author">
                     <div class="entry__author-about">
@@ -54,9 +47,9 @@
                     </div>
                 </div>
 
-            </div> <!-- s-entry__main -->
+            </div> 
 
-        </article> <!-- end entry/article -->
+        </article>
 
         <div class="comments-wrap">
           {{#if post.allowComments}}
@@ -68,8 +61,8 @@
                             {{> default/comment body=body user=user created_at=created_at}}
                         {{/each}}
                     </ol>
-                </div> <!-- end col-full -->
-            </div> <!-- end comments -->
+                </div> 
+            </div>
 
             {{#if user}}
             <div class="row comment-respond">
@@ -85,15 +78,15 @@
                     </div>
                     <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Add Comment" type="submit">
                     </fieldset>
-                </form> <!-- end form -->
+                </form>
                 </div>
-            </div> <!-- end comment-respond -->
+            </div>
             {{else}}
             <div class="row comment-respond">
                 <div id="respond" class="col-full">
                     <h3 class="h2">Please Login to comment</h3>
                 </div>
-            </div> <!-- end comment-respond -->
+            </div> 
             {{/if}}
 
 
@@ -105,6 +98,6 @@
                 </div>
               </div>
           {{/if}}
-        </div> <!-- end comments-wrap -->
+        </div> 
 
-    </section> <!-- end s-content -->
+    </section> 
