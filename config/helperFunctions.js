@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = {
   selectOption: function(status, options) {
     return options.fn(this).replace(new RegExp('value=\"'+status+'\"'), '$&selected="selected"');
@@ -10,6 +12,10 @@ module.exports = {
       }
     }
     return true;
+  },
+
+  convertTime: function(time) {
+    return moment(time).format("MMM Do YY")
   },
 
   isUserAuthenticated: (req, res, next) => {

@@ -11,7 +11,10 @@
             <div class="entry__header col-full">
                 <h1 class="entry__header-title display-1">{{post.title}}</h1>
                 <ul class="entry__header-meta">
-                    <li class="date">{{post.created_at}}</li>
+                        <li class="date">
+                            {{convertTime post.created_at }}
+                        </li>
+                    
                     <li class="byline">
                         By
                         <a href="#0">{{post.user.name}}</a>
@@ -32,8 +35,6 @@
                 </div> <!-- end s-content__taxonomies -->
 
                 <div class="entry__author">
-                    <img src="images/avatars/user-03.jpg" alt="">
-
                     <div class="entry__author-about">
                         <h5 class="entry__author-name">
                             <span>Posted by</span>
