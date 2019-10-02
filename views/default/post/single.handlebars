@@ -58,7 +58,7 @@
                     <h3 class="h2">Comments</h3>
                     <ol class="commentlist">
                         {{#each comments}}
-                            {{> default/comment body=body user=user created_at=created_at}}
+                            {{> default/comment body=body user=user created_at=created_at approved=approved}}
                         {{/each}}
                     </ol>
                 </div> 

@@ -55,9 +55,13 @@ module.exports = {
       const post = await Post.findById(req.params.id).populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]);
       const comments = await Comment.find({post: req.params.id}).populate('user', ['name', 'avatar']);
       const user = req.user || false;
-      res.render('default/post/single', {post, user, comments});
+      if (post) {
+        res.render('default/post/single', {post, user, comments});
+      } else {
+        req.flash('error-message', 'Post does not exist.');
+        res.redirect('/');
+      }
     } catch (error) {
-      req.flash('error-message', 'Post does not exist.');
       res.redirect('/');
     }
   },

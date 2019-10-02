@@ -48,7 +48,7 @@ module.exports = {
 
   deletePostComment: async (req, res) => {
     try {
-      const comment = await Comment.findByIdAndDelete(req.params.id);
+      await Comment.findByIdAndDelete(req.params.id);
       req.flash('success-message', `Comment was deleted`);
       res.redirect('back')
     } catch (error) {
