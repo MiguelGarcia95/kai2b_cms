@@ -7,54 +7,33 @@
           <table class="table">
             <thead>
               <tr>
-                <th> Assignee </th>
-                <th> Subject </th>
-                <th> Status </th>
-                <th> Last Update </th>
-                <th> Tracking ID </th>
+                <th> User </th>
+                <th> Comment </th>
+                <th> Date </th>
+                <th> Approval Status </th>
+                <th> Action </th>
               </tr>
             </thead>
             <tbody>
+              {{#each comments}}
               <tr>
                 <td>
-                  <img src="/admin/images/faces/face1.jpg" class="mr-2" alt="image"> David Grey </td>
-                <td> Fund is not recieved </td>
-                <td>
-                  <label class="badge badge-gradient-success">DONE</label>
+                  <img src="{{user.avatar}}" class="mr-2" alt="image"> {{user.name}} </td>
+                <td> {{body}}</td>
+                <td> {{convertTime created_at}} </td>
+                <td> 
+                  {{#if approved}} 
+                    Approved
+                  {{else}}
+                    <a href="/admin/posts/comments/{{_id}}/approve" class="btn btn-sm btn-gradient-success mr-2">Approve</a>
+                  {{/if}}
                 </td>
-                <td> Dec 5, 2017 </td>
-                <td> WD-12345 </td>
-              </tr>
-              <tr>
-                <td>
-                  <img src="/admin/images/faces/face2.jpg" class="mr-2" alt="image"> Stella Johnson </td>
-                <td> High loading time </td>
-                <td>
-                  <label class="badge badge-gradient-warning">PROGRESS</label>
+                <td> 
+                    <a href="/admin/posts/comments/{{_id}}/delete" class="btn btn-sm btn-gradient-danger mr-2">Delete</a>
                 </td>
-                <td> Dec 12, 2017 </td>
-                <td> WD-12346 </td>
               </tr>
-              <tr>
-                <td>
-                  <img src="/admin/images/faces/face3.jpg" class="mr-2" alt="image"> Marina Michel </td>
-                <td> Website down for one week </td>
-                <td>
-                  <label class="badge badge-gradient-info">ON HOLD</label>
-                </td>
-                <td> Dec 16, 2017 </td>
-                <td> WD-12347 </td>
-              </tr>
-              <tr>
-                <td>
-                  <img src="/admin/images/faces/face4.jpg" class="mr-2" alt="image"> John Doe </td>
-                <td> Loosing control on server </td>
-                <td>
-                  <label class="badge badge-gradient-danger">REJECTED</label>
-                </td>
-                <td> Dec 3, 2017 </td>
-                <td> WD-12348 </td>
-              </tr>
+              {{/each}}
+              
             </tbody>
           </table>
         </div>

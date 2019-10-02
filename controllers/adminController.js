@@ -27,7 +27,7 @@ module.exports = {
       const post = await Post.findById(req.params.id);
       // const post = await Post.findById(req.params.id).populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]);
       const comments = await Comment.find({post: req.params.id}).populate('user', ['name', 'avatar']);
-      res.render('admin/comments/index', {user, comments});
+      res.render('admin/comments/index', {user, comments, post});
     } catch (error) {
       req.flash('error-message', 'Could not get post comments. Try Again');
       res.redirect('/admin/posts')
