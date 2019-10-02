@@ -20,11 +20,16 @@ router.route('/posts/edit/:id')
   .put(adminController.updatePost);
 
 router.route('/posts/comments/:id')
-  .get(adminController.getPostComments)
+  .get(adminController.getPostComments);
+
+router.route('/posts/comments/:id/approve')
+  .put(adminController.approvePostComment);
+
+router.route('/posts/comments/:id/delete')
+  .delete(adminController.deletePostComment);
 
 router.route('/posts/:id/comments')
   .get(adminController.getComments);
-
 
 router.route('/posts/delete/:id')
   .delete(adminController.deletePost)

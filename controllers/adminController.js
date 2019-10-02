@@ -34,6 +34,14 @@ module.exports = {
     }
   },
 
+  approvePostComment: async (req, res) => {
+
+  },
+
+  deletePostComment: async (req, res) => {
+    
+  },
+
   submitPost: async (req, res) => {
     // later validate content
     
