@@ -7,10 +7,11 @@ const md5 = require('md5');
 module.exports = {
   index: async (req, res) => {
     try {
-      const posts = await Post.find().populate('category', 'name');
-      const sliderPosts = await Post.find().populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]).limit(3);
+      const posts = await Post.find().populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]);
+      const sliderPosts = posts.slice(0, 2);
+      const popularPosts = posts.slice(0, 5);
       const user = req.user || false;
-      res.render('default/index', {posts, user, sliderPosts});
+      res.render('default/index', {posts, user, sliderPosts, popularPosts});
     } catch (error) {
       req.flash('error-message', 'Could not get any posts. Try again.');
       res.redirect('back');

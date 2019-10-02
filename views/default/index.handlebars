@@ -17,12 +17,9 @@
     <div class="col-twelve md-twelve tab-full popular">
       <h3>Popular Posts</h3>
       <div class="block-1-2 block-m-full popular__posts">
-        {{> default/popular-post}}
-        {{> default/popular-post}}
-        {{> default/popular-post}}
-        {{> default/popular-post}}
-        {{> default/popular-post}}
-        {{> default/popular-post}}
+        {{#each popularPosts}}
+          {{> default/popular-post title=title id=_id created_at=created_at image=image user=user }}
+        {{/each}}
       </div> <!-- end popular_posts -->
     </div> <!-- end popular -->
     </div> <!-- end row -->
