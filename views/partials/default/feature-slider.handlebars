@@ -3,44 +3,27 @@
     <div class="col-full">
       <div class="featured-slider featured" data-aos="zoom-in">
 
+        {{#each posts}}
         <div class="featured__slide">
           <div class="entry">
-            <div class="entry__background" style="background-image:url('/default/images/thumbs/featured/featured-beetle.jpg');"></div>
+            <div class="entry__background" style="background-image:url('{{image}}');"></div>
             <div class="entry__content">
-              <span class="entry__category"><a href="#0">LifeStyle</a></span>
-              <h1><a href="#0" title="">The difference between Classics, Vintage & Antique Cars.</a></h1>
+              <span class="entry__category"><a href="/categories/{{category._id}}">{{category.name}}</a></span>
+              <h1><a href="/posts/{{_id}}" title="">{{title}}</a></h1>
               <div class="entry__info">
-                <a href="#0" class="entry__profile-pic">
-                  <img class="avatar" src="/default/images/avatars/user-03.jpg" alt="">
+                <a class="entry__profile-pic">
+                  <img class="avatar" src="{{user.avatar}}" alt="">
                 </a>
                 <ul class="entry__meta">
-                  <li><a href="#0">John Doe</a></li>
-                  <li>June 12, 2018</li>
+                  <li><a>{{user.name}}</a></li>
+                  <li>{{convertTime created_at}}</li>
                 </ul>
               </div>
             </div> <!-- end entry__content -->
           </div> <!-- end entry -->
         </div> <!-- end featured__slide -->
+        {{/each}}
 
-                <div class="featured__slide">
-          <div class="entry">
-            <div class="entry__background" style="background-image:url('/default/images/thumbs/featured/featured-beetle.jpg');"></div>
-            <div class="entry__content">
-              <span class="entry__category"><a href="#0">LifeStyle</a></span>
-              <h1><a href="#0" title="">The difference between Classics, Vintage & Antique Cars.</a></h1>
-              <div class="entry__info">
-                <a href="#0" class="entry__profile-pic">
-                  <img class="avatar" src="/default/images/avatars/user-03.jpg" alt="">
-                </a>
-                <ul class="entry__meta">
-                  <li><a href="#0">John Doe</a></li>
-                  <li>June 12, 2018</li>
-                </ul>
-              </div>
-            </div> <!-- end entry__content -->
-          </div> <!-- end entry -->
-        </div> <!-- end featured__slide -->
-          
       </div> <!-- end featured -->
     </div> <!-- end col-full -->
   </div>

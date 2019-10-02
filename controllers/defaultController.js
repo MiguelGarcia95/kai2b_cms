@@ -8,8 +8,9 @@ module.exports = {
   index: async (req, res) => {
     try {
       const posts = await Post.find().populate('category', 'name');
+      const sliderPosts = await Post.find().populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]).limit(3);
       const user = req.user || false;
-      res.render('default/index', {posts, user});
+      res.render('default/index', {posts, user, sliderPosts});
     } catch (error) {
       req.flash('error-message', 'Could not get any posts. Try again.');
       res.redirect('back');
@@ -42,7 +43,7 @@ module.exports = {
   getPosts: async (req, res) => {
     try {
       const user = req.user || false;
-      const posts = await Post.find().populate('category', 'name');;
+      const posts = await Post.find().populate('category', 'name');
       res.render('default/post/index', {posts, user});
     } catch (error) {
       req.flash('error-message', 'Could not get any posts. Try again.');
