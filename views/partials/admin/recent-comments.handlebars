@@ -22,14 +22,22 @@
                 <td> {{body}}</td>
                 <td> {{convertTime created_at}} </td>
                 <td> 
-                  {{#if approved}} 
-                    Approved
-                  {{else}}
-                    <a href="/admin/posts/comments/{{_id}}/approve" class="btn btn-sm btn-gradient-success mr-2">Approve</a>
-                  {{/if}}
+                {{#if approved}}
+                  <form action="/admin/posts/comments/{{_id}}/approve?newMethod=PUT" method="post">
+                    <a class="btn btn-sm  mr-2" style="font-weight: normal !important">Approved</a>
+                    <button href="" class="btn btn-sm btn-gradient-danger mr-2">Unapprove</button>
+                  </form>
+                {{else}}
+                  <form action="/admin/posts/comments/{{_id}}/approve?newMethod=PUT" method="post">
+                    <a class="btn btn-sm  mr-2">Unapproved</a>
+                    <button href="" class="btn btn-sm btn-gradient-success mr-2">Approve</button>
+                  </form>
+                {{/if}}
                 </td>
                 <td> 
-                    <a href="/admin/posts/comments/{{_id}}/delete" class="btn btn-sm btn-gradient-danger mr-2">Delete</a>
+                  <form action="/admin/posts/comments/{{_id}}/delete?newMethod=DELETE" method="post">
+                    <button href="" class="btn btn-sm btn-gradient-danger mr-2">Delete</button>
+                  </form>
                 </td>
               </tr>
               {{/each}}

@@ -35,11 +35,25 @@ module.exports = {
   },
 
   approvePostComment: async (req, res) => {
-
+    try {
+      const comment = await Comment.findById(req.params.id);
+      await comment.updateOne({$set:{'approved': !comment.approved}});
+      req.flash('success-message', 'Comment was approved!');
+      res.redirect('back')
+    } catch (error) {
+      req.flash('error-message', 'Comment could not be approved');
+      res.redirect('/admin/posts');
+    }
   },
 
   deletePostComment: async (req, res) => {
-    
+    try {
+      const comment = await Comment.findByIdAndDelete(req.params.id);
+      req.flash('success-message', `Comment was deleted`);
+      res.redirect('back')
+    } catch (error) {
+      req.flash('error-message', 'Comment could not be deleted');
+    }
   },
 
   submitPost: async (req, res) => {
