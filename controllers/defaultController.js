@@ -8,8 +8,8 @@ module.exports = {
   index: async (req, res) => {
     try {
       const posts = await Post.find().populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]);
-      const sliderPosts = posts.slice(0, 2);
-      const popularPosts = posts.slice(0, 5);
+      const sliderPosts = posts.slice(0, 3);
+      const popularPosts = posts.slice(0, 6);
       const user = req.user || false;
       res.render('default/index', {posts, user, sliderPosts, popularPosts});
     } catch (error) {
