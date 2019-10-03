@@ -1,26 +1,26 @@
-<!-- featured  -->
+->
 {{> default/feature-slider posts=sliderPosts }}
-<!-- s-content -->
+->
 <section class="s-content">
   <div class="row entries-wrap wide">
     <div class="entries">
       {{#each posts}}
         {{> default/post title=title category=category id=_id created_at=created_at image=image}}
       {{/each}}
-    </div> <!-- end entries -->
-  </div> <!-- end entries-wrap -->
+    </div>  
+  </div>
 
-   <!-- s-extra -->
+   
   <section class="s-extra" >
     <div class="row">
     <div class="col-twelve md-twelve tab-full popular">
-      <h3>Popular Posts</h3>
+      <h3>Latests Posts</h3>
       <div class="block-1-2 block-m-full popular__posts">
         {{#each popularPosts}}
           {{> default/popular-post title=title id=_id created_at=created_at image=image user=user }}
         {{/each}}
-      </div> <!-- end popular_posts -->
-    </div> <!-- end popular -->
-    </div> <!-- end row -->
-  </section> <!-- end s-extra -->
-</section> <!-- end s-content -->
+      </div>
+    </div>  
+    </div> 
+  </section>  
+</section>

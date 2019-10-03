@@ -11,20 +11,18 @@
               <span class="entry__category"><a href="/categories/{{category._id}}">{{category.name}}</a></span>
               <h1><a href="/posts/{{_id}}" title="">{{title}}</a></h1>
               <div class="entry__info">
-                <a class="entry__profile-pic">
-                  <img class="avatar" src="{{user.avatar}}" alt="">
-                </a>
+                <a class="entry__profile-pic"><img class="avatar" src="{{user.avatar}}" alt=""></a>
                 <ul class="entry__meta">
                   <li><a>{{user.name}}</a></li>
                   <li>{{convertTime created_at}}</li>
                 </ul>
               </div>
-            </div> <!-- end entry__content -->
-          </div> <!-- end entry -->
-        </div> <!-- end featured__slide -->
+            </div>
+          </div> 
+        </div>
         {{/each}}
 
-      </div> <!-- end featured -->
-    </div> <!-- end col-full -->
+      </div>
+    </div>
   </div>
-</section> <!-- end s-featured -->
+</section>
