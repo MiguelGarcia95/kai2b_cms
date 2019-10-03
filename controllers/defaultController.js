@@ -53,9 +53,8 @@ module.exports = {
       const pagination = {
         back: page === 0 ? false : true,
         foward: page === lastPage ? false : true,
-        firstPage: 0,
         lastPage: lastPage,
-        page: page,
+        page: Number(page),
       }
       res.render('default/post/index', {posts, user, pagination});
     } catch (error) {

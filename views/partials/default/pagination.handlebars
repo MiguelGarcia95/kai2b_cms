@@ -5,17 +5,17 @@
         {{#if pagination.back}}
           <li><a class="pgn__prev" href="#0">Prev</a></li>
         {{else}}
-          <li><a class="pgn__prev" href="#0">Prev</a></li>
+          <li><a class="pgn__prev" >Prev</a></li>
         {{/if}}
 
-        <li><a class="pgn__num" href="#0">{{pagination.firstPage}}</a></li>
-        <li><span class="pgn__num current">{{pagination.page}}</span></li>
-        <li><a class="pgn__num" href="#0">{{pagination.lastPage}}</a></li>
+        <li><a class="pgn__num" href="/posts?p=0">1</a></li>
+        <li><span class="pgn__num current">{{addNumber pagination.page}}</span></li>
+        <li><a class="pgn__num" href="/posts?p={{subNumber pagination.lastPage}}">{{pagination.lastPage}}</a></li>
 
         {{#if pagination.foward}}
           <li><a class="pgn__next" href="#0">Next</a></li>
         {{else}}
-          <li><a class="pgn__next" href="#0">Next</a></li>
+          <li><a class="pgn__next" >Next</a></li>
         {{/if}}
       </ul>
     </nav>

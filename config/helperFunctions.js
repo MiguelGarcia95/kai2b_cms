@@ -1,7 +1,7 @@
 const moment = require('moment');
 
 module.exports = {
-  selectOption: function(status, options) {
+  select: function(status, options) {
     return options.fn(this).replace(new RegExp('value=\"'+status+'\"'), '$&selected="selected"');
   },
 
@@ -13,6 +13,10 @@ module.exports = {
     }
     return true;
   },
+
+  addNumber: num => num += 1,
+
+  subNumber: num => num -= 1,
 
   convertTime: function(time) {
     return moment(time).format("MMMM Do YYYY, h:mm a")
