@@ -2,7 +2,7 @@
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Recent Tickets</h4>
+        <h4 class="card-title">Recent Comments</h4>
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -10,8 +10,6 @@
                 <th> User </th>
                 <th> Comment </th>
                 <th> Date </th>
-                <th> Approval Status </th>
-                <th> Action </th>
               </tr>
             </thead>
             <tbody>
@@ -21,27 +19,8 @@
                   <img src="{{user.avatar}}" class="mr-2" alt="image"> {{user.name}} </td>
                 <td> {{body}}</td>
                 <td> {{convertTime created_at}} </td>
-                <td> 
-                {{#if approved}}
-                  <form action="/admin/posts/comments/{{_id}}/approve?newMethod=PUT" method="post">
-                    <a class="btn btn-sm  mr-2" style="font-weight: normal !important">Approved</a>
-                    <button href="" class="btn btn-sm btn-gradient-danger mr-2">Unapprove</button>
-                  </form>
-                {{else}}
-                  <form action="/admin/posts/comments/{{_id}}/approve?newMethod=PUT" method="post">
-                    <a class="btn btn-sm  mr-2">Unapproved</a>
-                    <button href="" class="btn btn-sm btn-gradient-success mr-2">Approve</button>
-                  </form>
-                {{/if}}
-                </td>
-                <td> 
-                  <form action="/admin/posts/comments/{{_id}}/delete?newMethod=DELETE" method="post">
-                    <button href="" class="btn btn-sm btn-gradient-danger mr-2">Delete</button>
-                  </form>
-                </td>
               </tr>
               {{/each}}
-              
             </tbody>
           </table>
         </div>

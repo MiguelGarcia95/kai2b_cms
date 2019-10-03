@@ -7,7 +7,7 @@ const fs = require('fs');
 module.exports = {
   index: async (req, res) => {
     const user = req.user || false;
-    const comments = await Comment.find().limit(10);
+    const comments = await Comment.find().populate('user', ['name', 'avatar']).limit(10);
     const posts = await Post.find().populate('user', ['name', 'avatar']).limit(5);
     res.render('admin/index', {user, comments, posts});
   },
