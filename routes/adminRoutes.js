@@ -19,24 +19,25 @@ router.route('/posts/edit/:id')
   .get(adminController.editPost)
   .put(adminController.updatePost);
 
-router.route('/posts/comments/:id')
-  .get(adminController.getPostComments);
+router.route('/posts/comments/:id').get(adminController.getPostComments);
 
-router.route('/posts/comments/:id/approve')
-  .put(adminController.approvePostComment);
+router.route('/posts/comments/:id/approve').put(adminController.approvePostComment);
 
-router.route('/posts/comments/:id/delete')
-  .delete(adminController.deletePostComment);
+router.route('/posts/comments/:id/delete').delete(adminController.deletePostComment);
 
-router.route('/posts/:id/comments')
-  .get(adminController.getComments);
+router.route('/posts/:id/comments').get(adminController.getComments);
 
-router.route('/posts/delete/:id')
-  .delete(adminController.deletePost)
+router.route('/posts/delete/:id').delete(adminController.deletePost);
   
 router.route('/categories')
   .get(adminController.getCategories)
   .post(adminController.createCategories);
+
+router.route('/users').get(adminController.getUsers);
+router.route('/users/edit/:id')
+  .get(adminController.editUser)
+  .post(adminController.updateUser);
+
 
 router.route('/categories/delete/:id').delete(adminController.deleteCategory);
 
