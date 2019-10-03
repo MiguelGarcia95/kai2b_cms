@@ -1,103 +1,94 @@
 <section class="s-content s-content--top-padding s-content--narrow">
 
-        <article class="row entry format-standard">
+    <article class="row entry format-standard">
+        <div class="entry__media col-full">
+            <div class="entry__post-thumb" style="text-align: center" >
+                <img src="{{post.image}}" alt="{{post.title}}">
+            </div>
+        </div>
 
-            <div class="entry__media col-full">
-                <div class="entry__post-thumb" style="text-align: center" >
-                    <img src="{{post.image}}" alt="{{post.title}}">
+        <div class="entry__header col-full">
+            <h1 class="entry__header-title display-1">{{post.title}}</h1>
+            <ul class="entry__header-meta">
+                <li class="date">{{convertTime post.created_at}}</li>
+                <li class="byline">By <a href="#0">{{post.user.name}}</a></li>
+            </ul>
+        </div>
+
+        <div class="col-full entry__main">
+            <p class="lead drop-cap">{{post.description}}</p>
+            <div class="entry__taxonomies">
+                <div class="entry__cat">
+                    <h5>Posted In: </h5>
+                    <span class="entry__tax-list">
+                        <a href="/categories/{{post._id}}">{{post.category.name}}</a>
+                    </span>
                 </div>
             </div>
 
-            <div class="entry__header col-full">
-                <h1 class="entry__header-title display-1">{{post.title}}</h1>
-                <ul class="entry__header-meta">
-                    <li class="date">{{convertTime post.created_at}}</li>
-                    <li class="byline">By <a href="#0">{{post.user.name}}</a></li>
-                </ul>
-            </div>
+            <div class="entry__author">
+                <div class="entry__author-about">
+                    <h5 class="entry__author-name">
+                        <span>Posted by</span>
+                        <p>
+                            <img width="120" height="120" class="pull-left" alt="sample-image" src="{{post.user.avatar}}">
+                            {{post.user.name}}
+                        </p>
+                    </h5>
 
-            <div class="col-full entry__main">
-                <p class="lead drop-cap">{{post.description}}</p>
-                <div class="entry__taxonomies">
-                    <div class="entry__cat">
-                        <h5>Posted In: </h5>
-                        <span class="entry__tax-list">
-                            <a href="/categories/{{post._id}}">{{post.category.name}}</a>
-                        </span>
+                    <div class="entry__author-desc">
+                        {{#if post.user.about}}
+                        <p>{{post.user.about}}</p>
+                        {{else}}
+                        <p>This user has not filled their about me section.</p>
+                        {{/if}}
                     </div>
-                </div>
-
-                <div class="entry__author">
-                    <div class="entry__author-about">
-                        <h5 class="entry__author-name">
-                            <span>Posted by</span>
-                            <p>
-                                <img width="120" height="120" class="pull-left" alt="sample-image" src="{{post.user.avatar}}">
-                                {{post.user.name}}
-                            </p>
-                        </h5>
-
-                        <div class="entry__author-desc">
-                            {{#if post.user.about}}
-                            <p>{{post.user.about}}</p>
-                            {{else}}
-                            <p>This user has not filled their about me section.</p>
-                            {{/if}}
-                        </div>
-                    </div>
-                </div>
-
-            </div> 
-
-        </article>
-
-        <div class="comments-wrap">
-          {{#if post.allowComments}}
-            <div id="comments" class="row">
-                <div class="col-full">
-                    <h3 class="h2">Comments</h3>
-                    <ol class="commentlist">
-                        {{#each comments}}
-                            {{> default/comment body=body user=user created_at=created_at approved=approved}}
-                        {{/each}}
-                    </ol>
-                </div> 
-            </div>
-
-            {{#if user}}
-            <div class="row comment-respond">
-                <div id="respond" class="col-full">
-                <h3 class="h2">Add Comment</h3>
-                <form id="contactForm" method="post" action="/posts/{{post._id}}" >
-                    <fieldset>
-                    <div class="form-field">
-                        <input name="user" class="full-width" value="{{user._id}}" type="hidden">
-                    </div>
-                    <div class="message form-field">
-                        <textarea name="body" class="full-width" placeholder="Your Message*"></textarea>
-                    </div>
-                    <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Add Comment" type="submit">
-                    </fieldset>
-                </form>
                 </div>
             </div>
-            {{else}}
-            <div class="row comment-respond">
-                <div id="respond" class="col-full">
-                    <h3 class="h2">Please Login to comment</h3>
-                </div>
-            </div> 
-            {{/if}}
-
-
-
-          {{else}}
-              <div id="comments" class="row">
-                <div class="col-full">
-                  <h3 class="h2">Comments Not Allowed</h3>
-                </div>
-              </div>
-          {{/if}}
         </div> 
+    </article>
 
-    </section> 
+    <div class="comments-wrap">
+        {{#if post.allowComments}}
+        <div id="comments" class="row">
+            <div class="col-full">
+                <h3 class="h2">Comments</h3>
+                <ol class="commentlist">
+                    {{#each comments}}
+                        {{> default/comment }}
+                    {{/each}}
+                </ol>
+            </div> 
+        </div>
+
+        {{#if user}}
+        <div class="row comment-respond">
+            <div id="respond" class="col-full">
+            <h3 class="h2">Add Comment</h3>
+            <form id="contactForm" method="post" action="/posts/{{post._id}}" >
+                <fieldset>
+                <div class="form-field">
+                    <input name="user" class="full-width" value="{{user._id}}" type="hidden">
+                </div>
+                <div class="message form-field">
+                    <textarea name="body" class="full-width" placeholder="Your Message*"></textarea>
+                </div>
+                <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Add Comment" type="submit">
+                </fieldset>
+            </form>
+            </div>
+        </div>
+        {{else}}
+        <div class="row comment-respond">
+            <div id="respond" class="col-full"><h3 class="h2">Please Login to comment</h3></div>
+        </div> 
+        {{/if}}
+
+    {{else}}
+    <div id="comments" class="row">
+        <div class="col-full"><h3 class="h2">Comments Not Allowed</h3></div>
+    </div>
+    {{/if}}
+    </div> 
+
+</section> 
