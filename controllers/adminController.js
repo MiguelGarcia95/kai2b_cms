@@ -5,9 +5,11 @@ const {isEmpty} = require('../config/helperFunctions')
 const fs = require('fs');
 
 module.exports = {
-  index: (req, res) => {
+  index: async (req, res) => {
     const user = req.user || false;
-    res.render('admin/index', {user});
+    const comments = await Comment.find().limit(10);
+    const posts = await Post.find().populate('user', ['name', 'avatar']).limit(5);
+    res.render('admin/index', {user, comments, posts});
   },
   
   getPosts: async (req, res) => {
