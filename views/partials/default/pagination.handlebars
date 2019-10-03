@@ -3,7 +3,7 @@
     <nav class="pgn" data-aos="fade-up">
       <ul>
         {{#if pagination.back}}
-          <li><a class="pgn__prev" href="#0">Prev</a></li>
+          <li><a class="pgn__prev" href="/posts?p={{subNumber pagination.page}}">Prev</a></li>
         {{else}}
           <li><a class="pgn__prev" >Prev</a></li>
         {{/if}}
@@ -13,7 +13,7 @@
         <li><a class="pgn__num" href="/posts?p={{subNumber pagination.lastPage}}">{{pagination.lastPage}}</a></li>
 
         {{#if pagination.foward}}
-          <li><a class="pgn__next" href="#0">Next</a></li>
+          <li><a class="pgn__next" href="/posts?p={{addNumber pagination.page}}">Next</a></li>
         {{else}}
           <li><a class="pgn__next" >Next</a></li>
         {{/if}}

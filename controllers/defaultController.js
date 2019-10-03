@@ -43,7 +43,7 @@ module.exports = {
 
   getPosts: async (req, res) => {
     const limit = 1;
-    const page = req.query.p ? req.query.p : 0;
+    const page = req.query.p ? Number(req.query.p) : 0;
     const skipOver = limit * page;
     try {
       const user = req.user || false;
@@ -52,7 +52,7 @@ module.exports = {
       const lastPage = count/limit;
       const pagination = {
         back: page === 0 ? false : true,
-        foward: page === lastPage ? false : true,
+        foward: page >= lastPage - 1 ? false : true,
         lastPage: lastPage,
         page: Number(page),
       }
