@@ -11,7 +11,7 @@ router.all('/*', isUserAuthenticated, (req, res, next) => {
 router.route('/').get(adminController.index);
 router.route('/posts').get(adminController.getPosts);
 
-router.route('/posts/create')
+router.route('/post/create')
   .get(adminController.createPost)
   .post(adminController.submitPost);
 

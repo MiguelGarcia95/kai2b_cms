@@ -7,7 +7,7 @@ const md5 = require('md5');
 module.exports = {
   index: async (req, res) => {
     try {
-      const posts = await Post.find().populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]).limit(9);
+      const posts = await Post.find().populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]).sort({created_at: -1}).limit(9);
       const sliderPosts = posts.slice(0, 3);
       const popularPosts = posts.slice(0, 6);
       const user = req.user || false;
@@ -42,14 +42,14 @@ module.exports = {
   },
 
   getPosts: async (req, res) => {
-    const limit = 1;
+    const limit = 10;
     const page = req.query.p ? Number(req.query.p) : 0;
     const skipOver = limit * page;
     try {
       const user = req.user || false;
-      const posts = await Post.find().populate('category', 'name').skip(skipOver).limit(limit);
+      const posts = await Post.find().populate('category', 'name').skip(skipOver).sort({created_at: -1}).limit(limit);
       const count = await Post.countDocuments();
-      const lastPage = count/limit;
+      const lastPage = count/limit > 1 ? count/limit : 1;
       const pagination = {
         back: page === 0 ? false : true,
         foward: page >= lastPage - 1 ? false : true,

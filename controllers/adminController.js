@@ -7,7 +7,7 @@ const fs = require('fs');
 module.exports = {
   index: async (req, res) => {
     const user = req.user || false;
-    const posts = await Post.find().populate('user', ['name', 'avatar']).limit(10);
+    const posts = await Post.find().populate('user', ['name', 'avatar']).sort({created_at: -1}).limit(10);
     res.render('admin/index', {user, posts});
   },
   
@@ -26,7 +26,6 @@ module.exports = {
     const user = req.user || false;
     try {
       const post = await Post.findById(req.params.id);
-      // const post = await Post.findById(req.params.id).populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]);
       const comments = await Comment.find({post: req.params.id}).populate('user', ['name', 'avatar']);
       res.render('admin/comments/index', {user, comments, post});
     } catch (error) {
