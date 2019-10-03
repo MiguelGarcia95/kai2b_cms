@@ -43,12 +43,21 @@ module.exports = {
 
   getPosts: async (req, res) => {
     const limit = 1;
-    const page = req.params.p;
+    const page = req.query.p ? req.query.p : 0;
     const skipOver = limit * page;
     try {
       const user = req.user || false;
-      const posts = await Post.find().populate('category', 'name');
-      res.render('default/post/index', {posts, user});
+      const posts = await Post.find().populate('category', 'name').skip(skipOver).limit(limit);
+      const count = await Post.countDocuments();
+      const lastPage = count/limit;
+      const pagination = {
+        back: page === 0 ? false : true,
+        foward: page === lastPage ? false : true,
+        firstPage: 0,
+        lastPage: lastPage,
+        page: page,
+      }
+      res.render('default/post/index', {posts, user, pagination});
     } catch (error) {
       req.flash('error-message', 'Could not get any posts. Try again.');
       res.redirect('/');
