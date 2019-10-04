@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 const Category = require('../models/Category');
 const Comment = require('../models/Comment');
+const User = require('../models/User');
 const {isEmpty} = require('../config/helperFunctions')
 const fs = require('fs');
 
@@ -35,19 +36,46 @@ module.exports = {
   },
 
   getUsers: async (req, res) => {
-    
+    const user = req.user || false;
+    try {
+      const users = await User.find();
+      res.render('admin/users/index', {user, users});
+    } catch (error) {
+      req.flash('error-message', 'Could not get users. Try Again');
+      res.redirect('/admin');
+    }
   },
   
   updateUserPrivileges: async (req, res) => {
-
+    const user = req.user || false;
+    try {
+      const userToUpdate = await User.findById(req.params.id);
+      await userToUpdate.updateOne({$set:{'privileges': 'admin'}});
+    } catch (error) {
+      req.flash('error-message', 'Could update user privileges. Try Again');
+      res.redirect('/admin');
+    }
   },
   
   editUser: async (req, res) => {
-
+    const user = req.user || false;
+    try {
+      const userToUpdate = await User.findById(req.params.id);
+    } catch (error) {
+      req.flash('error-message', 'Could get user. Try Again');
+      res.redirect('/admin/users');
+    }
   },
 
   updateUser: async (req, res) => {
-
+    const user = req.user || false;
+    try {
+      await User.findByIdAndUpdate(req.params.id, {$set:req.body});
+      res.redirect('/admin/users');
+    } catch (error) {
+      req.flash('error-message', 'Could update user privileges. Try Again');
+      res.redirect('/admin');
+    }
   },
 
   approvePostComment: async (req, res) => {
