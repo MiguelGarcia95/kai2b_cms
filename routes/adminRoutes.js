@@ -34,6 +34,9 @@ router.route('/categories')
   .post(adminController.createCategories);
 
 router.route('/users').get(adminController.getUsers);
+
+router.route('/users/:id/privileges').put(adminController.updateUserPrivileges);
+
 router.route('/users/edit/:id')
   .get(adminController.editUser)
   .post(adminController.updateUser);

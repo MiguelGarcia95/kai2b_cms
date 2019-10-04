@@ -34,6 +34,22 @@ module.exports = {
     }
   },
 
+  getUsers: async (req, res) => {
+    
+  },
+  
+  updateUserPrivileges: async (req, res) => {
+
+  },
+  
+  editUser: async (req, res) => {
+
+  },
+
+  updateUser: async (req, res) => {
+
+  },
+
   approvePostComment: async (req, res) => {
     try {
       const comment = await Comment.findById(req.params.id);
