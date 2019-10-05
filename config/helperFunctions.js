@@ -14,6 +14,12 @@ module.exports = {
     return true;
   },
 
+  isAdmin: function(privilege, equalTo)  {
+    // return privilege === 'admin' ? true : false
+    console.log(privilege)
+    console.log(equalTo)
+  },
+
   addNumber: num => num += 1,
 
   subNumber: num => num -= 1,

@@ -39,7 +39,17 @@ module.exports = {
     const user = req.user || false;
     try {
       const users = await User.find();
-      res.render('admin/users/index', {user, users});
+      // if admin, get all users below admin in one list, and another list with fellow admin
+      // if subadmin, get all users below subadmin in one list, and one list with admins, and anothe with subadmins
+      // if user, get an individual list for user, admin, and subadmin
+      const privileges = {
+        admin: user.privilege == 'admin' ? true : false,
+        subadmin: user.privilege == 'subadmin' ? true : false,
+        user: user.privilege == 'user' ? true : false
+      }
+      console.log(privileges)
+
+      res.render('admin/users/index', {user, users, privileges});
     } catch (error) {
       req.flash('error-message', 'Could not get users. Try Again');
       res.redirect('/admin');
@@ -50,7 +60,7 @@ module.exports = {
     const user = req.user || false;
     try {
       const userToUpdate = await User.findById(req.params.id);
-      await userToUpdate.updateOne({$set:{'privileges': 'admin'}});
+      await userToUpdate.updateOne({$set:{'privilege': 'admin'}});
     } catch (error) {
       req.flash('error-message', 'Could update user privileges. Try Again');
       res.redirect('/admin');

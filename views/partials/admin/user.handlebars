@@ -1,0 +1,34 @@
+<tr>
+  <td>
+    <img src="{{avatar}}" class="mr-2" alt="image"> {{name}} 
+  </td>
+  <td class="text-capitalize" >
+    <form action="">
+      <div class="form-group">
+        {{isAdmin privileges 'test'}}
+        {{#if privileges.admin }}
+        <select class="form-control form-control-lg"  name="privilege">
+          {{#select privilege}}
+            <option value="subadmin" >Sub-Admin</option>
+            <option value="admin" >Admin</option>
+            <option value="user" >Sub-Admin</option>
+          {{/select}}
+        </select>
+        {{/if}}
+        
+        {{#if privileges.subadmin }}
+        {{/if}}
+        {{#if privileges.user }}
+        {{/if}}
+
+
+      </div>
+
+    </form>
+  </td>
+  <td>
+    <form action="">
+
+    </form>
+  </td>
+</tr>
