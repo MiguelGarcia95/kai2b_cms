@@ -43,6 +43,9 @@ module.exports = {
       admin = users.filter(u => u.privilege === 'admin');
       subadmin = users.filter(u => u.privilege === 'subadmin');
       regularUser = users.filter(u => u.privilege === 'user');
+      console.log('admin', admin);
+      console.log('subadmin', subadmin);
+      console.log('regularUser', regularUser);
 
       res.render('admin/users/index', {user, users, admin, subadmin, regularUser});
     } catch (error) {

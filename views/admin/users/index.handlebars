@@ -2,7 +2,56 @@
 
 <div class="row">
   <div class="col-12 grid-margin">
-    <div class="card">
+    {{#if admin}}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h4 class="card-title">Admins</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th> Name </th>
+                <th> Privileges </th>
+                <th> Action </th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each admin }}
+                {{> admin/user avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if subadmin}}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h4 class="card-title">Sub Admins</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th> Name </th>
+                <th> Privileges </th>
+                <th> Action </th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each subadmin }}
+                {{> admin/user avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if regularUser}}
+    <div class="card mb-3">
       <div class="card-body">
         <h4 class="card-title">Users</h4>
         <div class="table-responsive">
@@ -15,13 +64,15 @@
               </tr>
             </thead>
             <tbody>
-              {{#each users }}
-                {{> admin/user  }}
+              {{#each regularUser }}
+                {{> admin/user avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
               {{/each}}
             </tbody>
           </table>
         </div>
       </div>
     </div>
+    {{/if}}
+
   </div>
 </div>
