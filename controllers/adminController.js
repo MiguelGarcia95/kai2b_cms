@@ -39,17 +39,12 @@ module.exports = {
     const user = req.user || false;
     try {
       const users = await User.find();
-      // if admin, get all users below admin in one list, and another list with fellow admin
-      // if subadmin, get all users below subadmin in one list, and one list with admins, and anothe with subadmins
-      // if user, get an individual list for user, admin, and subadmin
-      const privileges = {
-        admin: user.privilege == 'admin' ? true : false,
-        subadmin: user.privilege == 'subadmin' ? true : false,
-        user: user.privilege == 'user' ? true : false
-      }
-      console.log(privileges)
+      let admin, subadmin, regularUser;
+      admin = users.filter(u => u.privilege === 'admin');
+      subadmin = users.filter(u => u.privilege === 'subadmin');
+      regularUser = users.filter(u => u.privilege === 'user');
 
-      res.render('admin/users/index', {user, users, privileges});
+      res.render('admin/users/index', {user, users, admin, subadmin, regularUser});
     } catch (error) {
       req.flash('error-message', 'Could not get users. Try Again');
       res.redirect('/admin');
