@@ -32,9 +32,12 @@
           <table class="table">
             <thead>
               <tr>
-                <th> Name </th>
-                <th> Privileges </th>
-                <th> Action </th>
+                <th>Name</th>
+                {{#if (isAdmin user.privilege 'subadmin')}}
+                  <th> Update Privilege </th>
+                {{else}}
+                  <th class="text-right"> Actions </th>
+                {{/if}}
               </tr>
             </thead>
             <tbody>
@@ -56,9 +59,12 @@
           <table class="table">
             <thead>
               <tr>
-                <th> Name </th>
-                <th> Privileges </th>
-                <th> Action </th>
+                <th>Name</th>
+                {{#if (isAdmin user.privilege 'user')}}
+                  <th> Update Privilege </th>
+                {{else}}
+                  <th class="text-right"> Actions </th>
+                {{/if}}
               </tr>
             </thead>
             <tbody>

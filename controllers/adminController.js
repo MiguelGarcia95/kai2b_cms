@@ -68,6 +68,7 @@ module.exports = {
     const user = req.user || false;
     try {
       const userToUpdate = await User.findById(req.params.id);
+      res.render('admin/users/edit', {user, userToUpdate})
     } catch (error) {
       req.flash('error-message', 'Could get user. Try Again');
       res.redirect('/admin/users');
