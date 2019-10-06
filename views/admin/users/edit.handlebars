@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-2 grid-margin height-10"></div>
+  <div class="col-md-8 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form action="/admin/users/edit/{{userToUpdate._id}}">
+          <div class="form-group">
+            <label >Description</label>
+            <textarea type="text" name="description" class="form-control" placeholder="Add short description about yourself">
+              {{userToUpdate.description}}
+            </textarea>
+          </div>
+          <button class="btn btn-lg btn-block btn-gradient-success">Update</button>
+        </form>
+        <hr>
+        <form action="/admin/users/delete/{{userToUpdate._id}}">  
+          <button class="btn btn-lg btn-block btn-gradient-danger">Delete Account</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -197,9 +197,7 @@ module.exports = {
     }
   },
 
-  getComments: async (req, res) => {
-
-  },
+  // getComments: async (req, res) => {  },
 
   createCategories: async (req, res) => {
     try {
