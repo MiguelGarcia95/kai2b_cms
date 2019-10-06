@@ -57,8 +57,10 @@ app.use(fileupload());
 // routes
 const defaultRoutes = require('./routes/defaultRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const adminPostRoutes = require('./routes/admin/posts');
 app.use('/', defaultRoutes);
 app.use('/admin', adminRoutes);
+app.use('/admin', adminPostRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
