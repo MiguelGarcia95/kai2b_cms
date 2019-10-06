@@ -55,7 +55,9 @@ module.exports = {
     const user = req.user || false;
     try {
       const userToUpdate = await User.findById(req.params.id);
-      await userToUpdate.updateOne({$set:{'privilege': 'admin'}});
+      req.flash('success-message', `User ${userToUpdate.name} updated to ${req.body.privilege}`);
+      await userToUpdate.updateOne({$set:{'privilege': req.body.privilege}});
+      res.redirect('back');
     } catch (error) {
       req.flash('error-message', 'Could update user privileges. Try Again');
       res.redirect('/admin');

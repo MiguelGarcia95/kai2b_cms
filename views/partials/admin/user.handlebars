@@ -3,7 +3,7 @@
     <img src="{{avatar}}" class="mr-2" alt="image"> {{name}} 
   </td>
   <td class="text-capitalize" >
-    <form action="">
+    <form class="forms-sample" method="post" action="/admin/users/{{_id}}/privileges?newMethod=PUT"  >
       <div class="form-group">
 
         {{#if (isAdmin currentUser.privilege section) }}
