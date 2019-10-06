@@ -25,8 +25,6 @@ router.route('/posts/comments/:id/approve').put(adminController.approvePostComme
 
 router.route('/posts/comments/:id/delete').delete(adminController.deletePostComment);
 
-// router.route('/posts/:id/comments').get(adminController.getComments);
-
 router.route('/posts/delete/:id').delete(adminController.deletePost);
   
 router.route('/categories')
@@ -40,7 +38,6 @@ router.route('/users/:id/privileges').put(adminController.updateUserPrivileges);
 router.route('/users/edit/:id')
   .get(adminController.editUser)
   .post(adminController.updateUser);
-
 
 router.route('/categories/delete/:id').delete(adminController.deleteCategory);
 

@@ -68,9 +68,14 @@ module.exports = {
     const user = req.user || false;
     try {
       const userToUpdate = await User.findById(req.params.id);
-      res.render('admin/users/edit', {user, userToUpdate})
+      if (String(userToUpdate._id) === String(user._id)) {
+        res.render('admin/users/edit', {user, userToUpdate})
+      } else {
+        req.flash('error-message', 'You can only edit your account.');
+        res.redirect('/admin/users');
+      }
     } catch (error) {
-      req.flash('error-message', 'Could get user. Try Again');
+      req.flash('error-message', 'Could not get user. Try Again');
       res.redirect('/admin/users');
     }
   },
