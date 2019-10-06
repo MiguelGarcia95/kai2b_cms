@@ -1,7 +1,5 @@
 const Post = require('../../models/Post');
 const Category = require('../../models/Category');
-// const Comment = require('../../models/Comment');
-// const User = require('../../models/User');
 const {isEmpty} = require('../../config/helperFunctions');
 const fs = require('fs');
 
