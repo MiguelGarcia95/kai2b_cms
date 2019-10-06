@@ -5,7 +5,7 @@
   <td class="text-capitalize" >
     <form action="">
       <div class="form-group">
-        {{isAdmin currentUser 'test'}}
+        {{#if (isAdmin currentUser.privilege section) }}
         <select class="form-control form-control-lg"  name="privilege">
           {{#select privilege}}
             <option value="subadmin" >Sub-Admin</option>
@@ -13,6 +13,9 @@
             <option value="user" >User</option>
           {{/select}}
         </select>
+        {{else}}
+        {{/if}}
+
       </div>
     </form>
   </td>

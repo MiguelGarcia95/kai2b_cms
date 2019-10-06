@@ -15,9 +15,23 @@ module.exports = {
   },
 
   isAdmin: function(privilege, equalTo)  {
-    // return privilege === 'admin' ? true : false
-    console.log(privilege)
-    console.log(equalTo)
+    if (privilege == 'user') return false;
+
+    if (privilege == 'subadmin') {
+      if (equalTo == 'user') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (privilege == 'admin') {
+      if (equalTo == 'admin') {
+        return false;
+      } else {
+        return true;
+      }
+    }
   },
 
   addNumber: num => num += 1,

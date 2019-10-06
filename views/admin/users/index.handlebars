@@ -17,7 +17,7 @@
             </thead>
             <tbody>
               {{#each admin }}
-                {{> admin/user avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
+                {{> admin/user section='admin' avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
               {{/each}}
             </tbody>
           </table>
@@ -41,7 +41,7 @@
             </thead>
             <tbody>
               {{#each subadmin }}
-                {{> admin/user avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
+                {{> admin/user section='subadmin' avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
               {{/each}}
             </tbody>
           </table>
@@ -65,7 +65,7 @@
             </thead>
             <tbody>
               {{#each regularUser }}
-                {{> admin/user avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
+                {{> admin/user section='user' avatar=avatar _id=_id name=name privilege=privilege currentUser=../user  }}
               {{/each}}
             </tbody>
           </table>
