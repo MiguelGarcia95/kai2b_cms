@@ -23,12 +23,17 @@
       </div>
     </form>
   </td>
-  <td>
+  <td class="btn-group" >               
+    
     {{#if (isUser currentUser._id _id) }}
-    <form action="">
-      <button>Edit</button>
+
+    <a class="btn btn-sm btn-gradient-primary" href="/admin/users/edit/{{_id}}">Edit</a>
+
+    <form action="/admin/users/{{_id}}/privileges?newMethod=PUT" >
+      <button type="submit" class="btn btn-sm btn-gradient-danger" >Delete</button>
     </form>
     {{/if}}
 
   </td>
+  <td></td>
 </tr>
