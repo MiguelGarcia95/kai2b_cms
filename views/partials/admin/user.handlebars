@@ -19,15 +19,16 @@
             <button class="btn btn-sm btn-gradient-primary">Update</button>
           </div>
         </div>
-        {{else}}
         {{/if}}
-
       </div>
     </form>
   </td>
   <td>
+    {{#if (isUser currentUser._id _id) }}
     <form action="">
-
+      <button>Edit</button>
     </form>
+    {{/if}}
+
   </td>
 </tr>

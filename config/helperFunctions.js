@@ -34,6 +34,8 @@ module.exports = {
     }
   },
 
+  isUser: (currentUserId, id) => String(currentUserId) === String(id),
+
   addNumber: num => num += 1,
 
   subNumber: num => num -= 1,

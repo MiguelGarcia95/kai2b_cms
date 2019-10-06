@@ -9,7 +9,7 @@ const fileupload = require('express-fileupload');
 const passport = require('passport');
 
 const app = express();
-const {select, convertTime, addNumber, subNumber, isAdmin} = require('./config/helperFunctions');
+const {select, convertTime, addNumber, subNumber, isAdmin, isUser} = require('./config/helperFunctions');
 const {globalVariables} = require('./config/config');
 
 // configure mongoose to connect to mongodb
@@ -42,7 +42,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // setup view engine for handlebars
-app.engine('handlebars', hbs({defaultLayout: 'default', helpers: {select, convertTime, addNumber, subNumber, isAdmin}}));
+app.engine('handlebars', hbs({
+  defaultLayout: 'default', 
+  helpers: {select, convertTime, addNumber, subNumber, isAdmin, isUser}
+}));
 app.set('view engine', 'handlebars');
 
 // Method Override middleware
