@@ -1,5 +1,5 @@
-const User = require('../models/User');
-const Comment = require('../models/Comment');
+const User = require('../../models/User');
+const Comment = require('../../models/Comment');
 
 module.exports = {
   postComment: async (req, res) => {
