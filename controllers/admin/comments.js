@@ -18,7 +18,7 @@ module.exports = {
     try {
       const comment = await Comment.findById(req.params.id);
       await comment.updateOne({$set:{'approved': !comment.approved}});
-      req.flash('success-message', 'Comment was approved!');
+      req.flash('success-message', `Comment was ${!comment.approved ? 'Approved' : 'Unapproved'}!`);
       res.redirect('back')
     } catch (error) {
       req.flash('error-message', 'Comment could not be approved');
