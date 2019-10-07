@@ -55,11 +55,9 @@ app.use(methodOverride('newMethod'));
 app.use(fileupload());
 
 // routes
-const defaultRoutes = require('./routes/defaultRoutes');
-const dRoutes = require('./routes/default/index');
+const defaultRoutes = require('./routes/default/index');
 const adminRoutes = require('./routes/admin/index');
 app.use('/', defaultRoutes);
-app.use('/', dRoutes);
 app.use('/admin', adminRoutes);
 
 
