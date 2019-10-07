@@ -1,12 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../../controllers/admin/users');
-const {isUserAuthenticated} = require('../../config/helperFunctions');
-
-router.all('/*', isUserAuthenticated, (req, res, next) => {
-  req.app.locals.layout = 'admin';
-  next();
-})
 
 router.route('/users').get(userController.getUsers);
 
