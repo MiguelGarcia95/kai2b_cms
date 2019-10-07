@@ -13,7 +13,7 @@ router.all('/*', (req, res, next) => {
   next();
 })
 
-// router.use('/', posts);
+router.use('/', posts);
 // router.use('/', comments);
 router.use('/', users);
 router.use('/', categories);
