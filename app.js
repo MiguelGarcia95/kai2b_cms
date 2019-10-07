@@ -59,10 +59,14 @@ const defaultRoutes = require('./routes/defaultRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const adminPostRoutes = require('./routes/admin/posts');
 const adminUserRoutes = require('./routes/admin/users');
+const adminCommentRoutes = require('./routes/admin/comments');
+const adminCategoryRoutes = require('./routes/admin/categories');
 app.use('/', defaultRoutes);
 app.use('/admin', adminRoutes);
 app.use('/admin', adminPostRoutes);
 app.use('/admin', adminUserRoutes);
+app.use('/admin', adminCommentRoutes);
+app.use('/admin', adminCategoryRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

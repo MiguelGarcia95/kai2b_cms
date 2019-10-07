@@ -10,18 +10,4 @@ router.all('/*', isUserAuthenticated, (req, res, next) => {
 
 router.route('/').get(adminController.index);
 
-router.route('/posts/comments/:id').get(adminController.getPostComments);
-
-router.route('/posts/comments/:id/approve').put(adminController.approvePostComment);
-
-router.route('/posts/comments/:id/delete').delete(adminController.deletePostComment);
-
-  
-router.route('/categories')
-  .get(adminController.getCategories)
-  .post(adminController.createCategories);
-
-router.route('/categories/delete/:id').delete(adminController.deleteCategory);
-
-
 module.exports = router;  
