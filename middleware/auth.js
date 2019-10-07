@@ -17,4 +17,11 @@ module.exports = {
   //     res.status(401).send({error: 'Authentication error. Token required'})
   //   }
   // }
+  isUserAuthenticated: (req, res, next) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect('/login');
+    }
+  }
 }

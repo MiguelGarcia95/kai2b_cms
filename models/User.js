@@ -38,6 +38,8 @@ const UserSchema = new Schema({
   }
 });
 
+console.log('isUserAuthenticated ran in User model');
+
 // encrypt password before saving user
 UserSchema.pre('save', async function(next) {
   const user = this;
@@ -47,5 +49,10 @@ UserSchema.pre('save', async function(next) {
   }
   next();
 });
+
+UserSchema.methods.isUserAuthenticated2 = function (req, res, next) {
+  console.log('isUserAuthenticated ran in User model');
+  console.log(req, res, next);
+}
 
 module.exports = mongoose.model('user', UserSchema);

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {isUserAuthenticated} = require('../../config/helperFunctions');
+const {isUserAuthenticated} = require('../../middleware/auth');
 
 router.all('/*', isUserAuthenticated, (req, res, next) => {
   req.app.locals.layout = 'admin';

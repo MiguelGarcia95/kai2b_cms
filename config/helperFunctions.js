@@ -43,12 +43,4 @@ module.exports = {
   convertTime: function(time) {
     return moment(time).format("MMMM Do YYYY, h:mm a")
   },
-
-  isUserAuthenticated: (req, res, next) => {
-    if (req.isAuthenticated()) {
-      next();
-    } else {
-      res.redirect('/login');
-    }
-  }
 }
