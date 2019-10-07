@@ -9,8 +9,6 @@ router.all('/*', (req, res, next) => {
 
 router.route('/').get(defaultController.index);
 
-router.route('/posts/:id')
-  .post(defaultController.postComment);
 
 
 module.exports = router;  

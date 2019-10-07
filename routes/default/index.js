@@ -6,15 +6,13 @@ const comments = require('./comments');
 const users = require('./users');
 const categories = require('./categories');
 
-// const defaultController = require('../controllers/defaultController');
-
 router.all('/*', (req, res, next) => {
   req.app.locals.layout = 'default';
   next();
 })
 
 router.use('/', posts);
-// router.use('/', comments);
+router.use('/', comments);
 router.use('/', users);
 router.use('/', categories);
 
