@@ -16,7 +16,7 @@ router.all('/*', (req, res, next) => {
 // router.use('/', posts);
 // router.use('/', comments);
 router.use('/', users);
-// router.use('/', categories);
+router.use('/', categories);
 
 module.exports = router;  
 
