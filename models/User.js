@@ -59,6 +59,9 @@ UserSchema.statics.validateUser = function(userData) {
   if (!userData.password) {
     errors.password = 'Password cannot be empty.';
     isValid = false;
+  } else if (userData.password.length < 5) { 
+    errors.password = 'Password was not confirmed.';
+    isValid = false;
   } else if (userData.password !== userData.confirm_password) {
     errors.password = 'Password was not confirmed.';
     isValid = false;
@@ -77,7 +80,6 @@ UserSchema.statics.validateUser = function(userData) {
     isValid = false;
   }
 
-  console.log(userData)
   return {isValid, errors}
 };
 
