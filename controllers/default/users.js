@@ -21,7 +21,6 @@ module.exports = {
     res.redirect('/');
   },
 
-
   registerGet: (req, res) => {
     const user = req.user || false;
     if (user) {
@@ -35,6 +34,8 @@ module.exports = {
   registerPost: async (req, res) => {
     req.body.avatar = `https://gravatar.com/avatar/${md5(req.body.email)}?d=identicon`;
     const user = await new User(req.body);
+    User.validateUser('s');
+    
     try {
       await user.save();
       req.flash('success-message', 'Registration successful. Please login.');

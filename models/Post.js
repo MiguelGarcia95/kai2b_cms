@@ -38,4 +38,8 @@ const PostSchema = new Schema({
   },
 });
 
+PostSchema.methods.validatePost = function(postData) {
+  console.log(postData)
+};
+
 module.exports = mongoose.model('post', PostSchema);
