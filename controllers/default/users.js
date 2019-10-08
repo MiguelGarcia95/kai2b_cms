@@ -32,11 +32,13 @@ module.exports = {
   },
 
   registerPost: async (req, res) => {
+    // validateUser
+
     req.body.avatar = `https://gravatar.com/avatar/${md5(req.body.email)}?d=identicon`;
-    const user = await new User(req.body);
-    User.validateUser('s');
     
     try {
+      User.validateUser(req.body);
+      const user = await new User(req.body);
       await user.save();
       req.flash('success-message', 'Registration successful. Please login.');
       res.redirect('/login');
