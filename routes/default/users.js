@@ -54,5 +54,4 @@ router.route('/register')
 
 router.route('/logout').get(userController.logout);
 
-
 module.exports = router;  

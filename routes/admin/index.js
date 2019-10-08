@@ -13,4 +13,3 @@ router.use('/', require('./users'));
 router.use('/', require('./categories'));
 
 module.exports = router;  
-
