@@ -37,6 +37,11 @@ const UserSchema = new Schema({
   }
 });
 
+const validateEmail = email => {
+  var regexString = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return regexString.test(email.toLowerCase());
+}
+
 // encrypt password before saving user
 UserSchema.pre('save', async function(next) {
   const user = this;
@@ -62,7 +67,10 @@ UserSchema.statics.validateUser = function(userData) {
   if (!userData.email) {
     errors.email = 'Email cannot be empty.';
     isValid = false;
-  } 
+  } else if (!validateEmail(userData.email)) {
+    errors.email = 'Email is not valid.';
+    isValid = false;
+  }
 
   if (!userData.name) {
     errors.name = 'Name cannot be empty.';
