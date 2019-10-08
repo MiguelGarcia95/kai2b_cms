@@ -27,6 +27,7 @@ module.exports = {
     let imagePath = '';
     req.body.user = req.user._id;
     const post = new Post(req.body);
+    Post.validatePost('s');
     try {
       if (!isEmpty(req.files)) {
         let file = req.files.postImage;

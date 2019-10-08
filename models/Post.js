@@ -38,7 +38,7 @@ const PostSchema = new Schema({
   },
 });
 
-PostSchema.methods.validatePost = function(postData) {
+PostSchema.statics.validatePost = function(postData) {
   console.log(postData)
 };
 
