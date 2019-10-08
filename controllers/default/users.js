@@ -32,19 +32,19 @@ module.exports = {
   },
 
   registerPost: async (req, res) => {
-    // validateUser
-
     req.body.avatar = `https://gravatar.com/avatar/${md5(req.body.email)}?d=identicon`;
-    
+
+    const userValidation = User.validateUser(req.body);
+    console.log(userValidation)
     try {
-      const isValid = User.validateUser(req.body);
-      if (isValid) {
+      if (userValidation.isValid) {
         const user = await new User(req.body);
         await user.save();
         req.flash('success-message', 'Registration successful. Please login.');
         res.redirect('/login');
       } else {
-        req.flash('error-message', error.message);
+        console.log(userValidation.errors);
+        req.flash('error-message', 'Not Valid');
         res.redirect('/register');
       }
     } catch (error) {

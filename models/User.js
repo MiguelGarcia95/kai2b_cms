@@ -48,11 +48,29 @@ UserSchema.pre('save', async function(next) {
 });
 
 UserSchema.statics.validateUser = function(userData) {
-  if (userData.password !== userData.confirm_password) {
-    console.log('password confirmation wrong');
-    return false;
+  let isValid = true;
+  let errors = {};
+
+  if (!userData.password) {
+    errors.password = 'Password cannot be empty.';
+    isValid = false;
+  } else if (userData.password !== userData.confirm_password) {
+    errors.password = 'Password was not confirmed.';
+    isValid = false;
   }
+
+  if (!userData.email) {
+    errors.email = 'Email cannot be empty.';
+    isValid = false;
+  } 
+
+  if (!userData.name) {
+    errors.name = 'Name cannot be empty.';
+    isValid = false;
+  }
+
   console.log(userData)
+  return {isValid, errors}
 };
 
 
