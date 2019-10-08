@@ -37,11 +37,16 @@ module.exports = {
     req.body.avatar = `https://gravatar.com/avatar/${md5(req.body.email)}?d=identicon`;
     
     try {
-      User.validateUser(req.body);
-      const user = await new User(req.body);
-      await user.save();
-      req.flash('success-message', 'Registration successful. Please login.');
-      res.redirect('/login');
+      const isValid = User.validateUser(req.body);
+      if (isValid) {
+        const user = await new User(req.body);
+        await user.save();
+        req.flash('success-message', 'Registration successful. Please login.');
+        res.redirect('/login');
+      } else {
+        req.flash('error-message', error.message);
+        res.redirect('/register');
+      }
     } catch (error) {
       req.flash('error-message', error.message);
       res.redirect('/register');

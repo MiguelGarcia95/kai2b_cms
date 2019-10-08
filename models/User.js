@@ -50,7 +50,7 @@ UserSchema.pre('save', async function(next) {
 UserSchema.statics.validateUser = function(userData) {
   if (userData.password !== userData.confirm_password) {
     console.log('password confirmation wrong');
-    // return false;
+    return false;
   }
   console.log(userData)
 };
