@@ -1,5 +1,24 @@
-{{log errors}}
 {{#if errors}}
-  {{errors.email}}
-
+  <div class="row" style="margin-top: 100px">
+    {{#each errors}}
+    <div class="col-four tab-full">
+      <div class="alert-box alert-box--error hideit">
+        <p>{{email}}</p>
+        <i class="fa fa-times alert-box__close"></i>
+      </div>
+    </div>
+    <div class="col-four tab-full">
+      <div class="alert-box alert-box--error hideit">
+        <p>{{password}}</p>
+        <i class="fa fa-times alert-box__close"></i>
+      </div>
+    </div>
+    <div class="col-four tab-full">
+      <div class="alert-box alert-box--error hideit">
+        <p>{{name}}</p>
+        <i class="fa fa-times alert-box__close"></i>
+      </div>
+    </div>
+    {{/each}}
+  </div>
 {{/if}} 
