@@ -45,6 +45,7 @@ module.exports = {
         req.flash('success-message', 'Post created Successfully');
         res.redirect('/admin/posts');
       } else {
+        console.log(postValidation.errors)
         req.flash('errors', postValidation.errors);
         res.redirect('back');
       }
