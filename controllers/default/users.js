@@ -43,7 +43,8 @@ module.exports = {
         res.redirect('/login');
       } else {
         // req.flash('error-message', 'Not Valid');
-        res.redirect('/register', {errors: userValidation.errors});
+        req.flash('errors', userValidation.errors)
+        res.redirect('/register');
       }
     } catch (error) {
       // req.flash('error-message', error.message);
