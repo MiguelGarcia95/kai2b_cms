@@ -26,9 +26,11 @@ module.exports = {
     
     let imagePath = '';
     req.body.user = req.user._id;
-    const post = new Post(req.body);
-    Post.validatePost('s');
+    const postValidation = Post.validatePost(req.body);
+    console.log(postValidation);
     try {
+      const post = new Post(req.body);
+
       if (!isEmpty(req.files)) {
         let file = req.files.postImage;
         imagePath = `/uploads/${post._id}.${file.mimetype.replace('image/', '')}`
@@ -37,6 +39,7 @@ module.exports = {
           if (error) throw error;
         })
       }
+
       post.image = imagePath;
       await post.save();
       req.flash('success-message', 'Post created Successfully');
