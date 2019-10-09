@@ -46,11 +46,11 @@ module.exports = {
         res.redirect('/admin/posts');
       } else {
         console.log(postValidation.errors)
-        req.flash('errors', postValidation.errors);
+        req.flash('adminErrors', postValidation.errors);
         res.redirect('back');
       }
     } catch (error) {
-      req.flash('errors', postValidation.errors);
+      req.flash('adminErrors', postValidation.errors);
       res.redirect('back');
     }
   },
