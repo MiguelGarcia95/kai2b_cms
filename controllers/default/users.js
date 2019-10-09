@@ -42,13 +42,12 @@ module.exports = {
         req.flash('success-message', 'Registration successful. Please login.');
         res.redirect('/login');
       } else {
-        // req.flash('error-message', 'Not Valid');
         req.flash('errors', userValidation.errors)
         res.redirect('/register');
       }
     } catch (error) {
-      // req.flash('error-message', error.message);
-      res.redirect('/register',  {errors: userValidation.errors});
+      req.flash('errors', {email: 'Server error: email already in use'});
+      res.redirect('/register');
     }
   },
 }
