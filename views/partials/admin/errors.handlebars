@@ -1,12 +1,11 @@
-{{log adminErrors}}
-{{#if adminErrors}}
-  {{#each adminErrors}}
+{{#if errors}}
+  {{#each errors}}
   {{#if title}}
-  <div class="row" id="proBanner_error">
+  <div class="row" id="proBanner_title">
     <div class="col-12">
-      <span class="d-flex align-items-center purchase-popup message_box">
+      <span class="d-flex align-items-center purchase-popup message_box margin-bottom-0">
         <p class="text-danger">{{title}}</p>
-        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_error">
+        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_title">
           <span>&times;</span>
         </button>
       </span>
@@ -14,11 +13,11 @@
   </div>
   {{/if}}
   {{#if category}}
-  <div class="row" id="proBanner_error">
+  <div class="row" id="proBanner_category">
     <div class="col-12">
-      <span class="d-flex align-items-center purchase-popup message_box">
+      <span class="d-flex align-items-center purchase-popup message_box margin-bottom-0">
         <p class="text-danger">{{category}}</p>
-        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_error">
+        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_category">
           <span>&times;</span>
         </button>
       </span>
@@ -26,11 +25,11 @@
   </div>
   {{/if}}
   {{#if status}}
-  <div class="row" id="proBanner_error">
+  <div class="row" id="proBanner_status">
     <div class="col-12">
-      <span class="d-flex align-items-center purchase-popup message_box">
+      <span class="d-flex align-items-center purchase-popup message_box margin-bottom-0">
         <p class="text-danger">{{status}}</p>
-        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_error">
+        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_status">
           <span>&times;</span>
         </button>
       </span>
@@ -38,11 +37,11 @@
   </div>
   {{/if}}
   {{#if description}}
-  <div class="row" id="proBanner_error">
+  <div class="row" id="proBanner_description">
     <div class="col-12">
       <span class="d-flex align-items-center purchase-popup message_box">
         <p class="text-danger">{{description}}</p>
-        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_error">
+        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_description">
           <span>&times;</span>
         </button>
       </span>
@@ -50,11 +49,11 @@
   </div>
   {{/if}}
   {{#if user}}
-  <div class="row" id="proBanner_error">
+  <div class="row" id="proBanner_user">
     <div class="col-12">
       <span class="d-flex align-items-center purchase-popup message_box">
         <p class="text-danger">{{user}}</p>
-        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_error">
+        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_user">
           <span>&times;</span>
         </button>
       </span>

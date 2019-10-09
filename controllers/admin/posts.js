@@ -45,12 +45,18 @@ module.exports = {
         req.flash('success-message', 'Post created Successfully');
         res.redirect('/admin/posts');
       } else {
-        console.log(postValidation.errors)
-        req.flash('adminErrors', postValidation.errors);
-        res.redirect('back');
+        console.log('try error block')
+        throw error;
+        // console.log(postValidation.errors)
+        // req.flash('errors', postValidation.errors);
+        // res.redirect('back');
+        // res.redirect('/admin/post/create');
       }
     } catch (error) {
-      req.flash('adminErrors', postValidation.errors);
+      console.log('catch block')
+      console.log(postValidation.errors)
+      req.flash('errors', postValidation.errors);
+      res.redirect('/admin/post/create');
       res.redirect('back');
     }
   },
