@@ -38,11 +38,11 @@ module.exports = {
         res.render('admin/users/edit', {user, userToUpdate})
       } else {
         req.flash('error-message', 'You can only edit your account.');
-        res.redirect('/admin/users');
+        res.redirect('back');
       }
     } catch (error) {
       req.flash('error-message', 'Could not get user. Try Again');
-      res.redirect('/admin/users');
+      res.redirect('back');
     }
   },
 

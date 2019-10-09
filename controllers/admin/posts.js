@@ -27,26 +27,30 @@ module.exports = {
     let imagePath = '';
     req.body.user = req.user._id;
     const postValidation = Post.validatePost(req.body);
-    console.log(postValidation);
     try {
-      const post = new Post(req.body);
+      if (postValidation.isValid) {
+        const post = new Post(req.body);
 
-      if (!isEmpty(req.files)) {
-        let file = req.files.postImage;
-        imagePath = `/uploads/${post._id}.${file.mimetype.replace('image/', '')}`
+        if (!isEmpty(req.files)) {
+          let file = req.files.postImage;
+          imagePath = `/uploads/${post._id}.${file.mimetype.replace('image/', '')}`
+    
+          file.mv('./public'+imagePath, error => {
+            if (error) throw error;
+          })
+        }
   
-        file.mv('./public'+imagePath, error => {
-          if (error) throw error;
-        })
+        post.image = imagePath;
+        await post.save();
+        req.flash('success-message', 'Post created Successfully');
+        res.redirect('/admin/posts');
+      } else {
+        req.flash('errors', postValidation.errors);
+        res.redirect('back');
       }
-
-      post.image = imagePath;
-      await post.save();
-      req.flash('success-message', 'Post created Successfully');
-      res.redirect('/admin/posts');
     } catch (error) {
-      req.flash('error-message', 'Post could not be created');
-      res.redirect('/admin/posts');
+      req.flash('errors', postValidation.errors);
+      res.redirect('back');
     }
   },
 

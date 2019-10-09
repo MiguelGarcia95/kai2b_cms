@@ -58,7 +58,7 @@ PostSchema.statics.validatePost = function(postData) {
   }
 
   if (!postData.description) {
-    errors.description = 'Status cannot be empty.';
+    errors.description = 'Description cannot be empty.';
     isValid = false;
   }
 
