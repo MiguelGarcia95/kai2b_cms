@@ -92,9 +92,7 @@ module.exports = {
         const posts = await Post.find({user: req.params.id});
         posts.forEach(async post => {
           const p = await Post.findByIdAndDelete(post._id);
-          fs.unlink(`./public${ p.image}`, error => {
-            // if (error) throw error;
-          });
+          fs.unlink(`./public${ p.image}`, error => {});
         })
       }
       await User.findByIdAndDelete(req.params.id);
