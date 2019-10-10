@@ -44,6 +44,11 @@
       });
     }
 
+    if (document.querySelector('#proBanner_password')) {
+      document.querySelector('#bannerClose_password').addEventListener('click',function() {
+        document.querySelector('#proBanner_password').classList.add('d-none');
+      });
+    }
 
     if ($("#inline-datepicker").length) {
       $('#inline-datepicker').datepicker({

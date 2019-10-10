@@ -12,6 +12,18 @@
     </div>
   </div>
   {{/if}}
+  {{#if password}}
+  <div class="row" id="proBanner_password">
+    <div class="col-12">
+      <span class="d-flex align-items-center purchase-popup message_box margin-bottom-0">
+        <p class="text-danger">{{password}}</p>
+        <button type="button" class="btn btn-sm btn-danger mr-2 message_btn" id="bannerClose_password">
+          <span>&times;</span>
+        </button>
+      </span>
+    </div>
+  </div>
+  {{/if}}
   {{#if category}}
   <div class="row" id="proBanner_category">
     <div class="col-12">

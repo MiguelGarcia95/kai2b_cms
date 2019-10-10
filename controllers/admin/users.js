@@ -51,19 +51,25 @@ module.exports = {
     const userValidation = User.validateUserUpdate(req.body);
     console.log(userValidation)
     try {
-      if (req.body.description) {
-        // update description
+      if (userValidation.isValid) {
+        if (req.body.description && req.body.password && req.body.password === req.body.confirm_password) {
+          // update description
+        }
+  
+        if (req.body.password && req.body.password === req.body.confirm_password) {
+          // update password if updated
+        }
+  
+        // await User.findByIdAndUpdate(req.params.id, {$set:req.body});
+        // res.redirect('/admin/users');
+        req.flash('errors', userValidation.errors);
+        res.redirect(`/admin/users/edit/${req.params.id}`);
+      } else {
+        req.flash('errors', userValidation.errors);
+        res.redirect(`/admin/users/edit/${req.params.id}`);
       }
-
-      if (req.body.password && req.body.password === req.body.confirm_password) {
-        // update password if updated
-      }
-
-      // await User.findByIdAndUpdate(req.params.id, {$set:req.body});
-      // res.redirect('/admin/users');
-      res.redirect(`/admin/users/edit/${req.params.id}`);
     } catch (error) {
-      req.flash('error-message', 'Could update user privileges. Try Again');
+      req.flash('errors', userValidation.errors);
       res.redirect(`/admin/users/edit/${req.params.id}`);
     }
   },

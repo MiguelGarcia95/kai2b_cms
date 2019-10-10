@@ -89,7 +89,7 @@ UserSchema.statics.validateUserUpdate = function(userData) {
 
   if (userData.password) {
     if (userData.password.length < 5) { 
-      errors.password = 'Password was not confirmed.';
+      errors.password = 'Password has to be at least 6 characters long.';
       isValid = false;
     } else if (userData.password !== userData.confirm_password) {
       errors.password = 'Password was not confirmed.';
@@ -97,6 +97,11 @@ UserSchema.statics.validateUserUpdate = function(userData) {
     }
   } else if (userData.confirm_password) {
     errors.password = 'Cannot confirm password if password empty.';
+    isValid = false;
+  }
+
+  if (!userData.password  && !userData.confirm_password && !userData.description) {
+    errors.title = 'Form cannot be empty.';
     isValid = false;
   }
 
