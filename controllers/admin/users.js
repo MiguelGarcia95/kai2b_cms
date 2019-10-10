@@ -53,17 +53,21 @@ module.exports = {
     try {
       if (userValidation.isValid) {
         if (req.body.description && req.body.password && req.body.password === req.body.confirm_password) {
-          // update description
+          await User.findByIdAndUpdate(req.params.id, {$set:req.body});
+          req.flash('success-message', `User was updated`);
+          res.redirect('/admin/users');
+        } else if (req.body.password && req.body.password === req.body.confirm_password) {
+          await User.findByIdAndUpdate(req.params.id, {$set: {password: req.body.password}});
+          req.flash('success-message', `User password was updated`);
+          res.redirect('/admin/users');
+        } else if (req.body.description) {
+          await User.findByIdAndUpdate(req.params.id, {$set: {description: req.body.description}});
+          req.flash('success-message', `User description was updated`);
+          res.redirect('/admin/users');
+        } else {
+          req.flash('errors', userValidation.errors);
+          res.redirect(`/admin/users/edit/${req.params.id}`);
         }
-  
-        if (req.body.password && req.body.password === req.body.confirm_password) {
-          // update password if updated
-        }
-  
-        // await User.findByIdAndUpdate(req.params.id, {$set:req.body});
-        // res.redirect('/admin/users');
-        req.flash('errors', userValidation.errors);
-        res.redirect(`/admin/users/edit/${req.params.id}`);
       } else {
         req.flash('errors', userValidation.errors);
         res.redirect(`/admin/users/edit/${req.params.id}`);
