@@ -58,7 +58,12 @@ module.exports = {
       const categories = await Category.find();
       const user = req.user || false;
       const post = await Post.findById(req.params.id).populate('category');
-      res.render('admin/post/edit', {post, categories, user});
+      if (String(user._id) === String(post.user)) {
+        res.render('admin/post/edit', {post, categories, user});
+      } else {
+        req.flash('error-message', 'Post could not be found');
+        res.redirect('/admin/posts');
+      }
     } catch (error) {
       req.flash('error-message', 'Post could not be found');
       res.redirect('/admin/posts');
@@ -67,13 +72,11 @@ module.exports = {
 
   updatePost: async (req, res) => {
     const postValidation = Post.validatePostUpdate(req.body);
-    console.log(postValidation);
     try {
       if (!postValidation.isValid) {
         req.flash('errors', postValidation.errors);
         return res.redirect(`/admin/posts/edit/${req.params.id}`);
       } else {
-        console.log('sdf')
         if (!req.body.allowComments) {
           req.body.allowComments = false;
         }
@@ -86,7 +89,7 @@ module.exports = {
           })
           req.body.image = imagePath
         }
-        // await Post.findByIdAndUpdate(req.params.id, {$set:req.body});
+        await Post.findByIdAndUpdate(req.params.id, {$set:req.body});
         req.flash('success-message', 'Post updated successfully');
         res.redirect('/admin/posts');
       }
