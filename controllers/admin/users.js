@@ -48,6 +48,8 @@ module.exports = {
 
   updateUser: async (req, res) => {
     const user = req.user || false;
+    const userValidation = User.validateUserUpdate(req.body);
+    console.log(userValidation)
     try {
       if (req.body.description) {
         // update description
@@ -57,11 +59,12 @@ module.exports = {
         // update password if updated
       }
 
-      await User.findByIdAndUpdate(req.params.id, {$set:req.body});
-      res.redirect('/admin/users');
+      // await User.findByIdAndUpdate(req.params.id, {$set:req.body});
+      // res.redirect('/admin/users');
+      res.redirect(`/admin/users/edit/${req.params.id}`);
     } catch (error) {
       req.flash('error-message', 'Could update user privileges. Try Again');
-      res.redirect('/admin');
+      res.redirect(`/admin/users/edit/${req.params.id}`);
     }
   },
 
@@ -71,7 +74,7 @@ module.exports = {
     try {
       //  make sure only user could delete their own user 
 
-      
+
       // Delete all user posts
       // const posts = await Post.find({user: req.params.id});
       // post foreach

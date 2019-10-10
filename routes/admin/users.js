@@ -8,7 +8,7 @@ router.route('/users/:id/privileges').put(userController.updateUserPrivileges);
 
 router.route('/users/edit/:id')
   .get(userController.editUser)
-  .post(userController.updateUser);
+  .put(userController.updateUser);
 
 router.route('/users/delete/:id').delete(userController.deleteUser);
 
