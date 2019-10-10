@@ -1,4 +1,6 @@
 {{> admin/title title='Categories' }}
+
+{{#if (isAdmin user.privilege 'subadmin')}}
 <div class="row">
   <div class="col-md-2 grid-margin height-10"></div>
   <div class="col-md-8 grid-margin stretch-card">
@@ -19,6 +21,7 @@
     </div>
   </div>
 </div>
+{{/if}}
 <div class="row">
   <div class="col-md-2 grid-margin height-10"></div>
   <div class="col-md-8 grid-margin stretch-card">
