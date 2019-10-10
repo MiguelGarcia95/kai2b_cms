@@ -49,6 +49,14 @@ module.exports = {
   updateUser: async (req, res) => {
     const user = req.user || false;
     try {
+      if (req.body.description) {
+        // update description
+      }
+
+      if (req.body.password && req.body.password === req.body.confirm_password) {
+        // update password if updated
+      }
+
       await User.findByIdAndUpdate(req.params.id, {$set:req.body});
       res.redirect('/admin/users');
     } catch (error) {
