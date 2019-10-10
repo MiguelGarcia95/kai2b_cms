@@ -10,4 +10,7 @@ router.route('/users/edit/:id')
   .get(userController.editUser)
   .post(userController.updateUser);
 
+router.route('/users/delete/:id').delete(userController.deleteUser);
+
+
 module.exports = router;  

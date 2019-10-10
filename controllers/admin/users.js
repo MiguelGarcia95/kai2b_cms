@@ -64,4 +64,26 @@ module.exports = {
       res.redirect('/admin');
     }
   },
+
+  deleteUser: async (req, res) => {
+    const user = req.user || false;
+
+    try {
+      //  make sure only user could delete their own user 
+
+      
+      // Delete all user posts
+      // const posts = await Post.find({user: req.params.id});
+      // post foreach
+        // const post = await Post.findByIdAndDelete(req.params.id);
+        //   fs.unlink(`./public${post.image}`, error => {
+        //     if (error) throw error;
+        //  });
+      // req.
+      // req.flash('success-message', `Post ${post.title} was deleted`);
+      res.redirect('/logout');
+    } catch (error) {
+      req.flash('error-message', 'User could not be deleted');
+    }
+  }
 }
