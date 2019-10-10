@@ -1,6 +1,7 @@
 const User = require('../../models/User');
 const Post = require('../../models/Post');
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
 
 module.exports = {
   getUsers: async (req, res) => {
@@ -91,16 +92,12 @@ module.exports = {
         const posts = await Post.find({user: req.params.id});
         posts.forEach(post => {
           console.log(post);
+          const p = await Post.findByIdAndDelete(req.params.id);
+          fs.unlink(`./public${post.image}`, error => {
+            if (error) throw error;
+          });
         })
       }
-      // Delete all user posts
-      // post foreach
-        // const post = await Post.findByIdAndDelete(req.params.id);
-        //   fs.unlink(`./public${post.image}`, error => {
-        //     if (error) throw error;
-        //  });
-      // req.
-      // req.flash('success-message', `Post ${post.title} was deleted`);
       res.redirect('/admin/users');
       // res.redirect('/logout');
     } catch (error) {
