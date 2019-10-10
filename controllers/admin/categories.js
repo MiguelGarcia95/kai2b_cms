@@ -2,13 +2,9 @@ const Category = require('../../models/Category');
 
 module.exports = {
   getCategories: async (req, res) => {
-    try {
-      const categories = await Category.find();
-      const user = req.user || false;
-      res.render('admin/category/index', {categories, user});
-    } catch (error) {
-      
-    }
+    const categories = await Category.find();
+    const user = req.user || false;
+    res.render('admin/category/index', {categories, user});
   },
 
   createCategories: async (req, res) => {
