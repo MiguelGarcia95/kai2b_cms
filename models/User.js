@@ -21,6 +21,10 @@ const UserSchema = new Schema({
     unique: true,
     trim: true,
   },
+  description: {
+    type: String,
+    required: false,
+  },
   privilege: {
     type: String,
     default: 'user',

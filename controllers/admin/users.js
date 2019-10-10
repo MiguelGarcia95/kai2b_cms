@@ -47,9 +47,7 @@ module.exports = {
   },
 
   updateUser: async (req, res) => {
-    const user = req.user || false;
     const userValidation = User.validateUserUpdate(req.body);
-    console.log(userValidation)
     try {
       if (userValidation.isValid) {
         if (req.body.description && req.body.password && req.body.password === req.body.confirm_password) {

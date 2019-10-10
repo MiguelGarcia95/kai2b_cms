@@ -37,8 +37,9 @@
                     </h5>
 
                     <div class="entry__author-desc">
-                        {{#if post.user.about}}
-                        <p>{{post.user.about}}</p>
+                        {{log post.user}}
+                        {{#if post.user.description}}
+                        <p><strong>About The Author: </strong>{{post.user.description}}</p>
                         {{else}}
                         <p>This user has not filled their about me section.</p>
                         {{/if}}

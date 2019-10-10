@@ -38,7 +38,7 @@ module.exports = {
 
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id).populate([{path:'category', select:'name'}, {path:'user', select:'avatar name'}]);
+      const post = await Post.findById(req.params.id).populate([{path:'category', select:'name'}, {path:'user', select:'avatar name description'}]);
       const comments = await Comment.find({post: req.params.id}).populate('user', ['name', 'avatar']);
       const user = req.user || false;
       if (post) {
