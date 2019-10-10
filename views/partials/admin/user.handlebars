@@ -29,7 +29,7 @@
 
     <a class="btn btn-sm btn-gradient-primary" href="/admin/users/edit/{{_id}}">Edit</a>
 
-    <form action="/admin/users/delete/{{_id}}?newMethod=DELETE" >
+    <form action="/admin/users/delete/{{_id}}?newMethod=DELETE" method="post" >
       <button type="submit" class="btn btn-sm btn-gradient-danger" >Delete</button>
     </form>
     {{/if}}

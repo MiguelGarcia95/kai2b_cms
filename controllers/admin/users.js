@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -52,7 +53,7 @@ module.exports = {
     const user = req.user || false;
     try {
       if (userValidation.isValid) {
-        const hashedPassword = await bcrypt.hash(user.password, 8);
+        const hashedPassword = await bcrypt.hash(req.body.password, 8);
         if (req.body.description && req.body.description !== user.description && req.body.password && req.body.password === req.body.confirm_password) {
           await User.findByIdAndUpdate(req.params.id, {$set: {description: req.body.description, password: hashedPassword}});
           req.flash('success-message', `User was updated`);
@@ -86,11 +87,13 @@ module.exports = {
     const user = req.user || false;
 
     try {
-      //  make sure only user could delete their own user 
-
-
+      if (String(user._id) === String(req.params.id)) {
+        const posts = await Post.find({user: req.params.id});
+        posts.forEach(post => {
+          console.log(post);
+        })
+      }
       // Delete all user posts
-      // const posts = await Post.find({user: req.params.id});
       // post foreach
         // const post = await Post.findByIdAndDelete(req.params.id);
         //   fs.unlink(`./public${post.image}`, error => {
@@ -98,9 +101,11 @@ module.exports = {
         //  });
       // req.
       // req.flash('success-message', `Post ${post.title} was deleted`);
-      res.redirect('/logout');
+      res.redirect('/admin/users');
+      // res.redirect('/logout');
     } catch (error) {
       req.flash('error-message', 'User could not be deleted');
+      res.redirect('/admin/users');
     }
   }
 }

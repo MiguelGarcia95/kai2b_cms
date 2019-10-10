@@ -20,7 +20,7 @@
           <button class="btn btn-lg btn-block btn-gradient-success">Update</button>
         </form>
         <hr>
-        <form action="/admin/users/delete/{{userToUpdate._id}}">  
+        <form action="/admin/users/delete/{{userToUpdate._id}}?newMethod=DELETE" method="post">  
           <button class="btn btn-lg btn-block btn-gradient-danger">Delete Account</button>
         </form>
       </div>
