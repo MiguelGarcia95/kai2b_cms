@@ -42,10 +42,8 @@ module.exports = {
       req.flash('success-message', 'Post created Successfully');
       res.redirect('/admin/posts');
     } else {
-      console.log(postValidation.errors)
       req.flash('errors', postValidation.errors);
       res.redirect('/admin/post/create');
-      // res.redirect('back');
     }
   },
 
@@ -68,22 +66,30 @@ module.exports = {
   },
 
   updatePost: async (req, res) => {
+    const postValidation = Post.validatePostUpdate(req.body);
+    console.log(postValidation);
     try {
-      if (!req.body.allowComments) {
-        req.body.allowComments = false;
+      if (!postValidation.isValid) {
+        req.flash('errors', postValidation.errors);
+        return res.redirect(`/admin/posts/edit/${req.params.id}`);
+      } else {
+        console.log('sdf')
+        if (!req.body.allowComments) {
+          req.body.allowComments = false;
+        }
+        if (!isEmpty(req.files)) {
+          let file = req.files.postImage;
+          let imagePath = `/uploads/${req.params.id}.${file.mimetype.replace('image/', '')}`
+    
+          file.mv('./public'+imagePath, error => {
+            if (error) throw error;
+          })
+          req.body.image = imagePath
+        }
+        // await Post.findByIdAndUpdate(req.params.id, {$set:req.body});
+        req.flash('success-message', 'Post updated successfully');
+        res.redirect('/admin/posts');
       }
-      if (!isEmpty(req.files)) {
-        let file = req.files.postImage;
-        let imagePath = `/uploads/${req.params.id}.${file.mimetype.replace('image/', '')}`
-  
-        file.mv('./public'+imagePath, error => {
-          if (error) throw error;
-        })
-        req.body.image = imagePath
-      }
-      await Post.findByIdAndUpdate(req.params.id, {$set:req.body});
-      req.flash('success-message', 'Post updated successfully');
-      res.redirect('/admin/posts');
     } catch (error) {
       req.flash('error-message', 'Post could not be updated');
       res.redirect('/admin/posts');

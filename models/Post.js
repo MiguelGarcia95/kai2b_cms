@@ -70,4 +70,31 @@ PostSchema.statics.validatePost = function(postData) {
   return {isValid, errors}
 };
 
+PostSchema.statics.validatePostUpdate = function(postData) {
+  let isValid = true;
+  let errors = {};
+
+  if (!postData.title) {
+    errors.title = 'Title cannot be empty.';
+    isValid = false;
+  }
+
+  if (!postData.category) {
+    errors.category = 'Category cannot be empty.';
+    isValid = false;
+  }
+
+  if (!postData.status) {
+    errors.status = 'Status cannot be empty.';
+    isValid = false;
+  }
+
+  if (!postData.description) {
+    errors.description = 'Description cannot be empty.';
+    isValid = false;
+  }
+
+  return {isValid, errors}
+};
+
 module.exports = mongoose.model('post', PostSchema);
