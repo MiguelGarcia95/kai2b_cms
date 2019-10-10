@@ -90,16 +90,15 @@ module.exports = {
     try {
       if (String(user._id) === String(req.params.id)) {
         const posts = await Post.find({user: req.params.id});
-        posts.forEach(post => {
-          console.log(post);
-          const p = await Post.findByIdAndDelete(req.params.id);
-          fs.unlink(`./public${post.image}`, error => {
-            if (error) throw error;
+        posts.forEach(async post => {
+          const p = await Post.findByIdAndDelete(post._id);
+          fs.unlink(`./public${ p.image}`, error => {
+            // if (error) throw error;
           });
         })
       }
-      res.redirect('/admin/users');
-      // res.redirect('/logout');
+      await User.findByIdAndDelete(req.params.id);
+      res.redirect('/logout');
     } catch (error) {
       req.flash('error-message', 'User could not be deleted');
       res.redirect('/admin/users');
