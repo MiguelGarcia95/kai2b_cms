@@ -6,14 +6,14 @@ const fs = require('fs');
 module.exports = {
   index: async (req, res) => {
     const user = req.user || false;
-    const posts = await Post.find().populate('user', ['name', 'avatar']).sort({created_at: -1}).limit(10);
+    const posts = await Post.find({user: user._id}).populate('user', ['name', 'avatar']).sort({created_at: -1}).limit(10);
     res.render('admin/index', {user, posts});
   },
 
   getPosts: async (req, res) => {
     try {
-      const posts = await Post.find().populate('category', 'name');
       const user = req.user || false;
+      const posts = await Post.find({user: user._id}).populate('category', 'name');
       res.render('admin/post/index', {posts, user});
     } catch (error) {
       req.flash('error-message', 'Could not get posts. Try Again');
@@ -61,7 +61,7 @@ module.exports = {
       if (String(user._id) === String(post.user)) {
         res.render('admin/post/edit', {post, categories, user});
       } else {
-        req.flash('error-message', 'Post could not be found');
+        req.flash('error-message', 'User does not have access to edit the post.');
         res.redirect('/admin/posts');
       }
     } catch (error) {
