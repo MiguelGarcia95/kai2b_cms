@@ -87,16 +87,21 @@ UserSchema.statics.validateUserUpdate = function(userData) {
   let isValid = true;
   let errors = {};
 
-  if (!userData.password) {
-    errors.password = 'Password cannot be empty.';
-    isValid = false;
-  } else if (userData.password.length < 5) { 
-    errors.password = 'Password was not confirmed.';
-    isValid = false;
-  } else if (userData.password !== userData.confirm_password) {
-    errors.password = 'Password was not confirmed.';
+  if (userData.password) {
+    if (userData.password.length < 5) { 
+      errors.password = 'Password was not confirmed.';
+      isValid = false;
+    } else if (userData.password !== userData.confirm_password) {
+      errors.password = 'Password was not confirmed.';
+      isValid = false;
+    }
+  } else if (userData.confirm_password) {
+    errors.password = 'Cannot confirm password if password empty.';
     isValid = false;
   }
+
+  // if (userData.description) {
+  // }
 
   return {isValid, errors}
 };
