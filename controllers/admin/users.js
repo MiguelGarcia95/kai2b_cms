@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   getUsers: async (req, res) => {
@@ -48,19 +49,24 @@ module.exports = {
 
   updateUser: async (req, res) => {
     const userValidation = User.validateUserUpdate(req.body);
+    const user = req.user || false;
     try {
       if (userValidation.isValid) {
-        if (req.body.description && req.body.password && req.body.password === req.body.confirm_password) {
-          await User.findByIdAndUpdate(req.params.id, {$set:req.body});
+        const hashedPassword = await bcrypt.hash(user.password, 8);
+        if (req.body.description && req.body.description !== user.description && req.body.password && req.body.password === req.body.confirm_password) {
+          await User.findByIdAndUpdate(req.params.id, {$set: {description: req.body.description, password: hashedPassword}});
           req.flash('success-message', `User was updated`);
           res.redirect('/admin/users');
         } else if (req.body.password && req.body.password === req.body.confirm_password) {
-          await User.findByIdAndUpdate(req.params.id, {$set: {password: req.body.password}});
+          await User.findByIdAndUpdate(req.params.id, {$set: {password: hashedPassword}});
           req.flash('success-message', `User password was updated`);
           res.redirect('/admin/users');
-        } else if (req.body.description) {
+        } else if (req.body.description && req.body.description !== user.description) {
           await User.findByIdAndUpdate(req.params.id, {$set: {description: req.body.description}});
           req.flash('success-message', `User description was updated`);
+          res.redirect('/admin/users');
+        } else if (req.body.description && req.body.description === user.description) {
+          req.flash('success-message', `There is nothing to update.`);
           res.redirect('/admin/users');
         } else {
           req.flash('errors', userValidation.errors);
