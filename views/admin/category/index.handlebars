@@ -29,18 +29,22 @@
             <thead>
               <tr>
                 <th>Category</th>
-                <th>Action</th>
+                {{#if (isAdmin user.privilege 'subadmin')}}
+                  <th>Action</th>
+                {{/if}}
               </tr>
             </thead>
             <tbody class="category-list">
               {{#each categories}}
               <tr id={{_id}}>
                 <td> {{name}} </td>
-                <td class="btn-group">
+                {{#if (isAdmin ../user.privilege 'subadmin')}}
+                <td class="btn-group">  
                   <form action="/admin/categories/delete/{{_id}}?newMethod=DELETE"  method="post">
                     <button type="submit" class="btn btn-sm btn-gradient-danger mr-2" >Delete</button>
                   </form>
                 </td>
+                {{/if}}
               </tr>
               {{/each}}
             </tbody>

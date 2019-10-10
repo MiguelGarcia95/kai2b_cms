@@ -9,11 +9,17 @@ module.exports = {
 
   createCategories: async (req, res) => {
     try {
-      const category = await new Category(req.body)
-      await category.save();
-      res.status(200).json(category);
+      const categoryExists = await Category.exists({name: req.body.name});
+      if (categoryExists) {        
+        req.flash('error-message', 'Category Already Exists');
+        res.status(400).json('');
+      } else {
+        const category = await new Category(req.body)
+        await category.save();
+        res.status(200).json(category);
+      }
     } catch (error) {
-      req.flash('error-message', 'Category could not be created');
+      req.flash('error-message', 'Category could not be added.');
       res.redirect('back');
     }
   },
