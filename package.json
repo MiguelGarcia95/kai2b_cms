@@ -1,6 +1,9 @@
 {
   "name": "kai2b_cms",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.3"
+  },
   "description": "kai2b_cms - A CMS made using NODEJS",
   "main": "app.js",
   "scripts": {
