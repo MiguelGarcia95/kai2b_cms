@@ -33,7 +33,7 @@ module.exports = {
         imagePath = `/uploads/${post._id}.${file.mimetype.replace('image/', '')}`
   
         file.mv('./public'+imagePath, error => {
-          if (error) throw error;
+          // if (error) throw error;
         })
       }
 
@@ -85,7 +85,7 @@ module.exports = {
           let imagePath = `/uploads/${req.params.id}.${file.mimetype.replace('image/', '')}`
     
           file.mv('./public'+imagePath, error => {
-            if (error) throw error;
+            // if (error) throw error;
           })
           req.body.image = imagePath
         }
